@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroStore</title>
+    
+    <!-- Font Awesome (pentru iconițe) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- LEGĂTURA CU CSS-UL TĂU -->
+    <link rel="stylesheet" href="style.css">
+    <script src="favorite.js" defer></script>
+</head>
+
+
+
+<body>
+
+<header class="header">
+    <div class="header-container">
+        <!-- Logo-ul tău -->
+        <div class="logo">
+    <a href="index.html">  <!-- sau ../html/index.html -->
+        <img src="logo.png" alt="ElectroStore" class="logo-img">
+    </a>
+</div>
+        
+        <!-- Bara de căutare -->
+        <!-- <div class="search-bar">
+            <input type="text" placeholder="Caută produse..." class="search-input">
+            <button type="submit" class="search-button">Caută</button>
+        </div> -->
+
+
+
+<div class="search-bar" style="position: relative;">
+    <input type="text" id="cautaInput" placeholder="Caută produse..." class="search-input">
+    <button class="search-button" onclick="cautaSimplu()">Caută</button>
+    <div id="rezultateCautare" class="rezultate-cautare" style="display: none; position: absolute; background: white; border: 1px solid #ddd; width: 100%; max-height: 300px; overflow-y: auto; z-index: 1000;"></div>
+</div>
+
+
+
+
+
+        
+        div class="user-actions">
+    <a href="cont.html" class="icon-link">
+        <i class="fa-regular fa-user"></i> 
+        <span>Cont</span>
+    </a>
+    <a href="favorite.html" class="icon-link" id="favorite-link">
+    <i class="fa-regular fa-heart"></i> 
+    <span>Favorite</span>
+</a>
+     <!-- ACEASTA ESTE LINIA PENTRU COȘ -->
+    <a href="cos.html" class="icon-link" id="cos-link">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Coș</span>
+    </a>
+</div>
+    </div>
+</header>
+
+
+
+
+
+<!-- NOUL MENIU DE CATEGORII -->
+<nav class="main-menu">
+    <div class="menu-container">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="produse.html">Produse</a></li>
+            <li class="menu-item"><a href="index.html">Promotii</a></li>
+            
+            <li class="menu-item"><a href="index.html">Acasa</a></li>
+            <li class="menu-item dropdown">
+
+
+                <a href="#">Finantare <i class="fa-solid fa-chevron-down"></i></a>
+                <!-- Submeniu (opțional) -->
+                <ul class="dropdown-menu">
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd">Rate fără dobândă</a></li>
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd">Credit online</a></li>
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd">Leasing</a></li>
+                </ul>
+
+
+            </li>
+            <li class="menu-item"><a href="contact.html">Suport clienti</a></li>
+            <li class="menu-item"><a href="despre.html">Despre noi</a></li>
+           
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// ========== SISTEM COȘ ==========
+let cos = JSON.parse(localStorage.getItem('cos')) || [];
+
+// Actualizează badge-ul în header
+function actualizeazaBadgeCos() {
+    let iconCos = document.querySelector('.fa-cart-shopping');
+    if (iconCos) {
+        let parent = iconCos.closest('.icon-link');
+        if (!parent) return;
+        
+        // Elimină badge-ul vechi
+        let badgeVechi = document.querySelector('.cos-badge');
+        if (badgeVechi) badgeVechi.remove();
+        
+        // Adaugă badge nou doar dacă sunt produse
+        if (cos.length > 0) {
+            let badge = document.createElement('span');
+            badge.className = 'cos-badge';
+            badge.textContent = cos.length;
+            parent.style.position = 'relative';
+            parent.appendChild(badge);
+        }
+    }
+}
+
+// Rulează la încărcarea paginii
+document.addEventListener('DOMContentLoaded', function() {
+    actualizeazaBadgeCos();
+});
+
+// Pentru favorite (dacă vrei și acolo)
+let favorite = JSON.parse(localStorage.getItem('favorite')) || [];
+
+function actualizeazaBadgeFavorite() {
+    let iconInima = document.querySelector('.fa-heart');
+    if (iconInima) {
+        let parent = iconInima.closest('.icon-link');
+        let badgeVechi = document.querySelector('.favorite-badge');
+        if (badgeVechi) badgeVechi.remove();
+        
+        if (favorite.length > 0) {
+            let badge = document.createElement('span');
+            badge.className = 'favorite-badge';
+            badge.textContent = favorite.length;
+            parent.style.position = 'relative';
+            parent.appendChild(badge);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    actualizeazaBadgeCos();
+    actualizeazaBadgeFavorite();
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--     
+        <section class="top-oferte">
+    <h2 class="section-title">Precomanda Noile Produse APPLE</h2>
+
+        <div class="produse-grid">
+       
+        <a href="precomanda/apple1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple1.webp" alt="Macbook Neo">
+                <h3>MacBook Neo 13"</h3>
+                <p class="descriere">Apple A18 Pro chip with 6‑core CPU and 5‑core GPU, 8GB RAM, 256GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 145 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">3.499,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple2.webp" alt="Iphone 17e">
+                <h3>iPhone 17e</h3>
+                <p class="descriere">Apple A19 chip, Ecran Super Retina XDR 6,1 inchi, 256GB, Alb</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 150 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">3.599,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="precomanda/apple3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple3.webp" alt="Tab Air">
+                <h3>iPad Air 11" M4</h3>
+                <p class="descriere">iPad Air M4, 11", 128GB, Wi-Fi, Albastru</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 140 lei/lună</div>
+                <div class="pret-container">
+            
+                    <span class="pret-nou">3.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="precomanda/apple4.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple4.webp" alt="Macbook Air M5">
+                <h3>MacBook Air 15" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 325 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">7.799,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple5.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple5.webp" alt="">
+                <h3>MacBook Air 13" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 260 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">6.299,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="precomanda/apple6.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="../imagini/apple6.webp" alt="Căști Sony">
+                <h3>AirPods 4</h3>
+                <p class="descriere">Apple AirPods 4 cu Active Noise Cancellation, Bluetooth 6, autonomie de pana la 30h</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 39 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">949,00 lei</span>
+                    <span class="pret-nou">849,00 lei</span>
+                </div>
+            </div>
+        </a>
+
+<section class="top-oferte">
+    <h2 class="section-title">Precomanda Noile Telefoane SAMSUNG</h2>
+
+
+        <div class="produse-grid">
+           
+        <a href="tot/S26.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/S26/S261.avif" alt="Samsung S26">
+                <h3>Telefon SAMSUNG Galaxy S26</h3>
+                <p class="descriere">5G, 256GB, 12GB RAM, Dual SIM, Black</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 148 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">5.099,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="tot/S26+.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+               <img src="../imagini/S26+/S26+1.avif" alt="Samsung S26+">
+                <h3>Telefon SAMSUNG Galaxy S26+</h3>
+                <p class="descriere">5G, 256GB, 12GB RAM, Dual SIM, Black</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 185 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">6.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="tot/S26U.HTML" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/S26U/S26U1.avif" alt="Samsung S26U">
+                <h3>Telefon SAMSUNG Galaxy S26 Ultra</h3>
+                <p class="descriere">5G, 512GB, 12GB RAM, Dual SIM, Black</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 214 lei/lună</div>
+                <div class="pret-container">
+            
+                    <span class="pret-nou">7.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+
+
+
+        <section class="top-oferte">
+    <h2 class="section-title">Televizoare SAMSUNG</h2>
+        
+
+
+        
+        <a href="tot/TV1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-20%</div>
+                <img src="../imagini/TV1/TV11.avif" alt="TV1">
+                <h3>Televizor LED Smart SAMSUNG</h3>
+                <p class="descriere">SAMSUNG 65DU8072, UltraHD 4K, HDR, 163cm</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 85 lei/lună</div>
+                <div class="pret-container">
+                     <span class="pret-vechi">2.549,99 lei</span>
+                    <span class="pret-nou">2.049,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="tot/TV2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="../imagini/TV2/TV21.jpg" alt="TV2">
+                <h3>Televizor Neo QLED MiniLED Smart SAMSUNG</h3>
+                <p class="descriere">SAMSUNG 50QN80F, 4K, HDR, 125cm</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 108 lei/lună</div>
+                <div class="pret-container">
+                     <span class="pret-vechi">2.699,99 lei</span>
+                    <span class="pret-nou">2.599,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="tot/TV3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-15%</div>
+               <img src="../imagini/TV3/TV31.avif" alt="TV3">
+                <h3>Televizor LED Smart SAMSUNG</h3>
+                <p class="descriere">85U8072, 4K, 214cm</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 39 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">5.999,99 lei</span>
+                    <span class="pret-nou">5.099.99 lei</span>
+                </div>
+            </div>
+        </a>
+                <div class="produse-grid">
+         
+              
+                    
+
+
+<section class="top-oferte">
+    <h2 class="section-title">Laptop-uri ASUS</h2>
+        
+
+
+
+
+
+
+        
+        <a href="precomanda/apple1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple1.webp" alt="Macbook Neo">
+                <h3>MacBook Neo 13"</h3>
+                <p class="descriere">Apple A18 Pro chip with 6‑core CPU and 5‑core GPU, 8GB RAM, 256GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 145 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">3.499,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple2.webp" alt="Iphone 17e">
+                <h3>iPhone 17e</h3>
+                <p class="descriere">Apple A19 chip, Ecran Super Retina XDR 6,1 inchi, 256GB, Alb</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 150 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">3.599,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple3.webp" alt="Tab Air">
+                <h3>iPad Air 11" M4</h3>
+                <p class="descriere">iPad Air M4, 11", 128GB, Wi-Fi, Albastru</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 140 lei/lună</div>
+                <div class="pret-container">
+            
+                    <span class="pret-nou">3.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple4.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple4.webp" alt="Macbook Air M5">
+                <h3>MacBook Air 15" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 325 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">7.799,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="precomanda/apple5.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple5.webp" alt="">
+                <h3>MacBook Air 13" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 260 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">6.299,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple6.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="../imagini/apple6.webp" alt="Căști Sony">
+                <h3>AirPods 4</h3>
+                <p class="descriere">Apple AirPods 4 cu Active Noise Cancellation, Bluetooth 6, autonomie de pana la 30h</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 39 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">949,00 lei</span>
+                    <span class="pret-nou">849,00 lei</span>
+                </div>
+            </div>
+        </a>
+                <div class="produse-grid">
+            
+       
+        <a href="precomanda/apple1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple1.webp" alt="Macbook Neo">
+                <h3>MacBook Neo 13"</h3>
+                <p class="descriere">Apple A18 Pro chip with 6‑core CPU and 5‑core GPU, 8GB RAM, 256GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 145 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">3.499,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="precomanda/apple2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple2.webp" alt="Iphone 17e">
+                <h3>iPhone 17e</h3>
+                <p class="descriere">Apple A19 chip, Ecran Super Retina XDR 6,1 inchi, 256GB, Alb</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 150 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">3.599,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple3.webp" alt="Tab Air">
+                <h3>iPad Air 11" M4</h3>
+                <p class="descriere">iPad Air M4, 11", 128GB, Wi-Fi, Albastru</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 140 lei/lună</div>
+                <div class="pret-container">
+            
+                    <span class="pret-nou">3.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+       
+        <a href="precomanda/apple4.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple4.webp" alt="Macbook Air M5">
+                <h3>MacBook Air 15" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 325 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">7.799,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple5.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="../imagini/apple5.webp" alt="">
+                <h3>MacBook Air 13" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 260 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">6.299,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="precomanda/apple6.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="../imagini/apple6.webp" alt="Căști Sony">
+                <h3>AirPods 4</h3>
+                <p class="descriere">Apple AirPods 4 cu Active Noise Cancellation, Bluetooth 6, autonomie de pana la 30h</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 39 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">949,00 lei</span>
+                    <span class="pret-nou">849,00 lei</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+</body> -->
+
+
+
+
+
+
+
+
+<!-- SECȚIUNE 1 - APPLE -->
+<section class="top-oferte">
+    <h2 class="section-title">Precomanda Noile Produse APPLE</h2>
+
+    <div class="produse-grid">
+        <!-- Produs 1 - MacBook Neo -->
+        <a href="apple1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="apple1.webp" alt="Macbook Neo">
+                <h3>MacBook Neo 13"</h3>
+                <p class="descriere">Apple A18 Pro chip with 6‑core CPU and 5‑core GPU, 8GB RAM, 256GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 145 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">3.499,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 2 - iPhone 17e -->
+        <a href="apple2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="apple2.webp" alt="Iphone 17e">
+                <h3>iPhone 17e</h3>
+                <p class="descriere">Apple A19 chip, Ecran Super Retina XDR 6,1 inchi, 256GB, Alb</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 150 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">3.599,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 3 - iPad Air -->
+        <a href="apple3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="apple3.webp" alt="Tab Air">
+                <h3>iPad Air 11" M4</h3>
+                <p class="descriere">iPad Air M4, 11", 128GB, Wi-Fi, Albastru</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 140 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">3.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 4 - MacBook Air 15" -->
+        <a href="apple4.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="apple4.webp" alt="Macbook Air M5">
+                <h3>MacBook Air 15" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 325 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">7.799,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 5 - MacBook Air 13" -->
+        <a href="apple5.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="apple5.webp" alt="MacBook Air 13">
+                <h3>MacBook Air 13" M5</h3>
+                <p class="descriere">Apple M5 chip with 10-core CPU and 10-core GPU, 16GB RAM, 512GB, Silver</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 260 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">6.299,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 6 - AirPods 4 -->
+        <a href="apple6.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="apple6.webp" alt="AirPods 4">
+                <h3>AirPods 4</h3>
+                <p class="descriere">Apple AirPods 4 cu Active Noise Cancellation, Bluetooth 6, autonomie de pana la 30h</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 39 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">949,00 lei</span>
+                    <span class="pret-nou">849,00 lei</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- SECȚIUNE 2 - SAMSUNG TELEFOANE -->
+<section class="top-oferte">
+    <h2 class="section-title">Precomanda Noile Telefoane SAMSUNG</h2>
+
+    <div class="produse-grid">
+        <!-- Produs 1 - S26 -->
+        <a href="S26.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="S261.avif" alt="Samsung S26">
+                <h3>Telefon SAMSUNG Galaxy S26</h3>
+                <p class="descriere">5G, 256GB, 12GB RAM, Dual SIM, Black</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 148 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">5.099,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 2 - S26+ -->
+        <a href="S26+.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="S26+1.avif" alt="Samsung S26+">
+                <h3>Telefon SAMSUNG Galaxy S26+</h3>
+                <p class="descriere">5G, 256GB, 12GB RAM, Dual SIM, Black</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 185 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">6.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 3 - S26 Ultra -->
+        <a href="S26U.HTML" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="S26U1.avif" alt="Samsung S26U">
+                <h3>Telefon SAMSUNG Galaxy S26 Ultra</h3>
+                <p class="descriere">5G, 512GB, 12GB RAM, Dual SIM, Black</p>
+                <div class="stoc">✅ Precomanda</div>
+                <div class="rate">De la 214 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-nou">7.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- SECȚIUNE 3 - TELEVIZOARE SAMSUNG -->
+<section class="top-oferte">
+    <h2 class="section-title">Televizoare SAMSUNG</h2>
+
+    <div class="produse-grid">
+        <!-- Produs 1 - TV 65" -->
+        <a href="TV1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-20%</div>
+                <img src="TV11.avif" alt="TV Samsung 65">
+                <h3>Televizor LED Smart SAMSUNG</h3>
+                <p class="descriere">SAMSUNG 65DU8072, UltraHD 4K, HDR, 163cm</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 85 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">2.549,99 lei</span>
+                    <span class="pret-nou">2.049,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 2 - TV QLED -->
+        <a href="TV2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="TV21.jpg" alt="TV Samsung QLED">
+                <h3>Televizor Neo QLED MiniLED Smart</h3>
+                <p class="descriere">SAMSUNG 50QN80F, 4K, HDR, 125cm</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 108 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">2.699,99 lei</span>
+                    <span class="pret-nou">2.599,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 3 - TV 85" -->
+        <a href="TV3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-15%</div>
+                <img src="TV31.avif" alt="TV Samsung 85">
+                <h3>Televizor LED Smart SAMSUNG</h3>
+                <p class="descriere">85U8072, 4K, 214cm</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 39 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">5.999,99 lei</span>
+                    <span class="pret-nou">5.099,99 lei</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- SECȚIUNE 4 - LAPTOP-URI ASUS -->
+<section class="top-oferte">
+    <h2 class="section-title">Laptop-uri ASUS</h2>
+
+    <div class="produse-grid">
+        <!-- Produs 1 - ASUS TUF -->
+         <a href="produs1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-20%</div>
+                <img src="tuf1.avif" alt="ASUS TUF">
+                <h3>Laptop Gaming ASUS TUF A15</h3>
+                <p class="descriere">Procesor AMD Ryzen 5 7535HS, 16GB RAM, SSD 512GB, placă video dedicată...</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 130 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">3.899,90 lei</span>
+                    <span class="pret-nou">3.119,95 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 2 - ASUS ROG -->
+        <a href="ROG.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-200 lei</div>
+                <img src="ROG1.jpg" alt="ASUS ROG">
+                <h3>Laptop Gaming ASUS ROG Strix G16</h3>
+                <p class="descriere">G615JM-RV013, Intel Core i5-13450HX pana la 4.6GHz, 16" Full HD+, 16GB, SSD 1TB, NVIDIA GeForce RTX 5060 8GB</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 214 lei/lună</div>
+                <div class="pret-container">
+                   <span class="pret-vechi">7.599,90 lei</span>
+                    <span class="pret-nou">7.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 3 - ASUS Vivobook 16 LED -->
+        <a href="Vivobook16Led.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-250 lei</div>
+                <img src="16Led1.jpg" alt="ASUS Vivobook 16 LED">
+                <h3>Laptop ASUS Vivobook 16 LED</h3>
+                <p class="descriere">V3607VU-RP092, Intel Core 5 210H pana la 4.8GHz, 16" WUXGA, 16GB, SSD 1TB, NVIDIA GeForce RTX 4050 6GB</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 140 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">5.149,99 lei</span>
+                    <span class="pret-nou">4.799,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 4 - ASUS Vivobook 16 -->
+        <a href="Vivobook16.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="Vbook1.avif" alt="ASUS Vivobook">
+                <h3>Laptop ASUS Vivobook 16</h3>
+                <p class="descriere">R1605VA-MB1012, Intel Core i5-13500H pana la 4.7GHz, 16" WUXGA, 16GB, SSD 512GB</p>
+                <div class="stoc epuizat">❌ Stoc Epuizat</div>
+                <div class="rate">De la 116 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">2.899,99 lei</span>
+                    <span class="pret-nou">2.799,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 5 - ASUS ExpertBook -->
+        <a href="ExpertBookP1.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-400 lei</div>
+                <img src="Ebook1.avif" alt="ASUS ExpertBook">
+                <h3>Laptop ASUS ExpertBook P1</h3>
+                <p class="descriere">PM1503CDA-S70027, AMD Ryzen 5 7535HS pana la 4.55GHz, 15.6" Full HD, 16GB, SSD 512GB, AMD Radeon 660M</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 63 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">2.499,99 lei</span>
+                    <span class="pret-nou">2.099,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 6 - ASUS Laptop ASUS Zenbook S 14 OLED -->
+        <a href="Zenbooks14.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">NOU</div>
+                <img src="Zbook1.avif" alt="ASUS ExpertBook">
+                <h3>Laptop ASUS Zenbook S 14 OLED</h3>
+                <p class="descriere">UX5406SA-PZ278X, Intel Core Ultra 7 258V pana la 4.8GHz, 14" 3K Touch, 32GB, SSD 1TB, Intel Arc Graphics</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 222 lei/lună</div>
+                <div class="pret-container">
+                    
+                    <span class="pret-nou">7.699,99 lei</span>
+                </div>
+            </div>
+        </a>   
+    </div>   
+    </section>
+
+
+
+
+
+
+
+
+    <!-- SECȚIUNE 6 - CONSOLE -->
+<section class="top-oferte">
+    <h2 class="section-title">Console</h2>
+
+    <div class="produse-grid">
+        <!-- Produs 1 - PS5 -->
+        <a href="PS5.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-100 lei</div>
+                <img src="PS1.avif" alt="PS5">
+                <h3>Consola PlayStation 5 Slim</h3>
+                <p class="descriere">(PS5) 1TB, E-Chassis, White</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 80 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">2.799,99 lei</span>
+                    <span class="pret-nou">2.699,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 2 - Xbox Series S -->
+        <a href="XboxS.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-10%</div>
+                <img src="Xbox1.avif" alt="Xbox Series X">
+                <h3>Consola Microsoft Xbox Series S</h3>
+                <p class="descriere">Console Microsoft Xbox Series X, Digital Edition 1TB, White</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 79 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">2.099,99 lei</span>
+                    <span class="pret-nou">1.899,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+         <!-- Produs 3 - Nitendo -->
+        <a href="produs6.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-400 lei</div>
+                <img src="Nitendo1.jpg" alt="Nitendo">
+                <h3>Consola NINTENDO Switch OLED White</h3>
+                <p class="descriere">Ecran OLED de 7 inchi, 64 GB stocare interna, Alb</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 43 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">1.799,99 lei</span>
+                    <span class="pret-nou">1.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Coloana 1 - Despre -->
+        <div class="footer-col">
+            <h4>ElectroStore</h4>
+            <p>Magazinul tău de încredere pentru produse electronice de calitate. Oferim laptopuri, telefoane, accesorii și multe altele.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+        
+        <!-- Coloana 2 - Link-uri utile -->
+        <div class="footer-col">
+            <h4>Link-uri utile</h4>
+            <ul class="footer-links">
+                <li><a href="despre.html">Despre noi</a></li>
+                <li><a href="despre.html">Contact</a></li>
+               <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd" target="_blank">Finanțare BRD</a></li>
+                <li><a href="retur.html">Retur și garanție</a></li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 3 - Contact -->
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-contact">
+                <li><i class="fa-solid fa-location-dot"></i>  Bulevardul Gării 25, 627350 Focșani</li>
+                <li><i class="fa-solid fa-phone"></i> 0767 676 767</li>
+                <li><i class="fa-solid fa-envelope"></i> contact@electrostore.ro</li>
+                <li><i class="fa-solid fa-clock"></i> Luni - Vineri: 09:00 - 18:00</li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 4 - Newsletter -->
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>Abonează-te pentru oferte exclusive!</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Adresa ta de email" class="newsletter-input">
+                <button type="submit" class="newsletter-btn">Abonare</button>
+            </form>
+            <p class="copyright">© 2026 ElectroStore. Toate drepturile rezervate.</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+<script>
+function cautaSimplu() {
+    let input = document.getElementById('cautaInput');
+    let rezultate = document.getElementById('rezultateCautare');
+    let text = input.value.toLowerCase().trim();
+    
+    // Lista produselor - FĂRĂ VIRGULE ÎN PLUS
+    let produse = [
+        { 
+            nume: "MacBook Neo", 
+            pret: "3.499,99 lei", 
+            link: "apple1.html",
+            imagine: "apple1.webp" 
+        },
+        { 
+            nume: "Laptop Gaming ASUS TUF A15", 
+            pret: "3.119,95 lei", 
+            link: "produs1.html",
+            imagine: "produs1.avif" 
+        },
+        { 
+            nume: "Telefon SAMSUNG Galaxy S25 Ultra ", 
+            pret: "5.899,99 lei", 
+            link: "produs2.html",
+            imagine: "produs2.avif" 
+        },
+        { 
+            nume: "Desktop PC APPLE Mac Mini M4", 
+            pret: "5.299,99 lei", 
+            link: "produs3.html",
+            imagine: "produs3.avif" 
+        },
+        { 
+            nume: "Smartwatch SAMSUNG Galaxy Watch7", 
+            pret: "799,00 lei", 
+            link: "produs4.html",
+            imagine: "produs4.avif" 
+        },
+        { 
+            nume: "Casti SONY WH-1000XM5", 
+            pret: "1.049,99 lei", 
+            link: "produs5.html",
+            imagine: "produs5.avif" 
+        },
+        { 
+            nume: "Consola NINTENDO Switch OLED White", 
+            pret: "1.399,99 lei", 
+            link: "produs6.html",
+            imagine: "produs6.jpg" 
+        },
+        { 
+            nume: "iPhone 17e", 
+            pret: "3.599,99 lei", 
+            link: "apple2.html",
+            imagine: "apple2.webp" 
+        },
+        { 
+            nume: "iPad Air 11 inch M4", 
+            pret: "3.399,99 lei", 
+            link: "apple3.html",
+            imagine: "apple3.webp" 
+        },
+        { 
+            nume: "MacBook Air 15 inch M5", 
+            pret: "7.799,99 lei", 
+            link: "apple4.html",
+            imagine: "apple4.webp" 
+        },
+        { 
+            nume: "MacBook Air 13 inch M5", 
+            pret: "6.299,99 lei", 
+            link: "apple5.html",
+            imagine: "apple5.webp" 
+        },
+        { 
+            nume: "AirPods 4", 
+            pret: "849,00 lei", 
+            link: "apple6.html",
+            imagine: "apple6.webp" 
+        },
+        { 
+            nume: "Telefon SAMSUNG Galaxy S26", 
+            pret: "5.099,99 lei", 
+            link: "S26.html",
+            imagine: "S261.avif" 
+        },
+        { 
+            nume: "Telefon SAMSUNG Galaxy S26+", 
+            pret: "6.399,99 lei", 
+            link: "S26+.html",
+            imagine: "S26+1.avif" 
+        },
+        
+        { 
+            nume: "Telefon SAMSUNG Galaxy S26 Ultra", 
+            pret: "7.399,99 lei", 
+            link: "S26U.HTML",
+            imagine: "S26U1.avif" 
+        },
+        { 
+            nume: "Televizor LED Smart SAMSUNG", 
+            pret: "2.049,99 lei", 
+            link: "TV1.html",
+            imagine: "TV11.avif" 
+        },
+        { 
+            nume: "Televizor Neo QLED MiniLED Smart", 
+            pret: "2.599,99 lei", 
+            link: "TV2.html",
+            imagine: "TV21.jpg" 
+        },
+        { 
+            nume: "Televizor LED Smart SAMSUNG", 
+            pret: "5.099,99 lei", 
+            link: "TV3.html",
+            imagine: "TV31.avif" 
+        },
+        { 
+            nume: "Laptop Gaming ASUS ROG Strix G16", 
+            pret: "7.399,99 lei", 
+            link: "ROG.html",
+            imagine: "ROG1.jpg" 
+        },
+        { 
+            nume: "Laptop ASUS Vivobook 16 LED", 
+            pret: "4.799,99 lei", 
+            link: "/Vivobook16Led.html",
+            imagine: "16Led1.jpg" 
+        },
+        { 
+            nume: "Laptop ASUS Vivobook 16", 
+            pret: "2.799,99 lei", 
+            link: "Vivobook16.html",
+            imagine: "Vbook1.avif" 
+        },
+        { 
+            nume: "Laptop ASUS ExpertBook P1", 
+            pret: "2.099,99 lei", 
+            link: "ExpertBookP1.html",
+            imagine: "Ebook1.avif" 
+        },
+        { 
+            nume: "Laptop ASUS Zenbook S 14 OLED", 
+            pret: "7.699,99 lei", 
+            link: "Zenbooks14.html",
+            imagine: "Zbook1.avif" 
+        },
+        { 
+            nume: "Consola PlayStation 5 Slim", 
+            pret: "2.699,99 lei", 
+            link: "PS5.html",
+            imagine: "PS1.avif" 
+        },
+        { 
+            nume: "Consola Microsoft Xbox Series S", 
+            pret: "1.899,99 lei", 
+            link: "XboxS.html",
+            imagine: "Xbox1.avif" 
+        }       
+];
+    
+
+    // Caută produse
+    let gasite = [];
+    for (let produs of produse) {
+        if (produs.nume.toLowerCase().includes(text)) {
+            gasite.push(produs);
+        }
+    }
+    
+    // Afișează rezultate
+    if (gasite.length > 0 && text.length > 0) {
+        let html = '';
+        for (let produs of gasite) {
+            html += '<div style="display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="window.location.href=\'' + produs.link + '\'">';
+            html += '   <img src="' + produs.imagine + '" style="width: 45px; height: 45px; object-fit: contain; margin-right: 15px;" onerror="this.src=\'https://placehold.co/45x45/0066cc/white?text=??\'">';
+            html += '   <div style="flex: 1;">';
+            html += '       <div style="font-weight: 600; margin-bottom: 4px; color: #333;">' + produs.nume + '</div>';
+            html += '       <div style="color: #0066cc; font-weight: 500; font-size: 14px;">' + produs.pret + '</div>';
+            html += '   </div>';
+            html += '</div>';
+        }
+        rezultate.innerHTML = html;
+        rezultate.style.display = 'block';
+    } else {
+        rezultate.innerHTML = '<div style="padding: 15px; text-align: center; color: #999;">Niciun produs găsit</div>';
+        rezultate.style.display = 'block';
+    }
+}
+
+// Ascunde la click în afară
+document.addEventListener('click', function(e) {
+    let searchBar = document.querySelector('.search-bar');
+    let rezultate = document.getElementById('rezultateCautare');
+    if (searchBar && !searchBar.contains(e.target)) {
+        rezultate.style.display = 'none';
+    }
+});
+
+// Caută în timp real
+document.getElementById('cautaInput').addEventListener('keyup', function() {
+    cautaSimplu();
+});
+
+// Caută la click pe buton
+let searchButton = document.querySelector('.search-button');
+if (searchButton) {
+    searchButton.addEventListener('click', function() {
+        cautaSimplu();
+    });
+}
+</script>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<script src="script.js"></script>
+
+
+    
+    </body>

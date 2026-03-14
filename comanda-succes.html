@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandă finalizată - ElectroStore</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .success-page {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .success-icon {
+            font-size: 80px;
+            color: #00aa00;
+            margin-bottom: 20px;
+        }
+        .order-number {
+            font-size: 20px;
+            color: #0066cc;
+            margin: 20px 0;
+        }
+        .btn-home {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-page">
+        <div class="success-icon"><i class="fa-regular fa-circle-check"></i></div>
+        <h1>Comandă finalizată cu succes!</h1>
+        <p>Îți mulțumim pentru comandă. Vei primi un email de confirmare în curând.</p>
+        <div class="order-number">Număr comandă: <span id="orderId"></span></div>
+        <a href="index.html" class="btn-home">Înapoi la magazin</a>
+    </div>
+    <script>
+        document.getElementById('orderId').textContent = new URLSearchParams(window.location.search).get('id');
+    </script>
+</body>
+</html>

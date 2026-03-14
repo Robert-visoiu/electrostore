@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suport Clienți - ElectroStore</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Stiluri suplimentare pentru pagina de suport */
+        .support-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: #0066cc;
+        }
+        
+        /* Hero Section */
+        .support-hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .support-hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .support-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Grid contact rapid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-card i {
+            font-size: 40px;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .contact-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .contact-card .contact-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .contact-card .contact-link:hover {
+            background: #0052a3;
+        }
+        
+        /* Formular contact */
+        .contact-form-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+        }
+        
+        .form-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 5px;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            grid-column: span 2;
+            padding: 15px 30px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #0052a3;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 50px;
+        }
+        
+        .faq-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .faq-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .faq-question i {
+            color: #0066cc;
+            font-size: 20px;
+        }
+        
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+            padding-left: 30px;
+        }
+        
+        /* Hartă */
+        .map-section {
+            margin-bottom: 50px;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Program */
+        .program-section {
+            background: #f5f5f7;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .program-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .program-list {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .program-item {
+            text-align: left;
+        }
+        
+        .program-item h4 {
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        
+        .program-item p {
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width,
+            .submit-btn {
+                grid-column: span 1;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .support-hero h2 {
+                font-size: 32px;
+            }
+            
+            .program-list {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER COMPLET (același ca pe toate paginile) -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="ElectroStore" class="logo-img">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="cautaInput" placeholder="Caută produse..." class="search-input">
+                <button class="search-button" onclick="cautaSimplu()">Caută</button>
+                <div id="rezultateCautare" class="rezultate-cautare"></div>
+            </div>
+            <div class="user-actions">
+                <a href="cont.html" class="icon-link"><i class="fa-regular fa-user"></i><span>Cont</span></a>
+                <a href="favorite.html" class="icon-link"><i class="fa-regular fa-heart"></i><span>Favorite</span></a>
+                <a href="cos.html" class="icon-link"><i class="fa-solid fa-cart-shopping"></i><span>Coș</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENIU CATEGORII -->
+    <nav class="main-menu">
+        <div class="menu-container">
+            <ul class="menu-list">
+                <li class="menu-item"><a href="produse.html">Produse</a></li>
+                <li class="menu-item"><a href="precomanda.html">Precomanda Apple</a></li>
+                <li class="menu-item"><a href="index.html">Acasa</a></li>
+                <li class="menu-item dropdown">
+                    <a href="#">Finantare <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.brd.ro" target="_blank">Rate fără dobândă</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Credit online</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Leasing</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="contact.html">Suport clienti</a></li>
+                <li class="menu-item"><a href="despre.html">Despre noi</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PAGINA SUPORT CLIENTI -->
+    <div class="support-page">
+        <!-- Titlu pagină -->
+        <h1 class="page-title">
+            <i class="fa-solid fa-phone-volume" style="margin-right: 10px; color: #0066cc;"></i>
+    Suport Clienți
+        </h1>
+        
+        <!-- Hero Section -->
+        <div class="support-hero">
+            <h2>Cu ce te putem ajuta?</h2>
+            <p>Suntem aici pentru tine 24/7. Alege una dintre opțiunile de mai jos sau completează formularul de contact.</p>
+        </div>
+        
+        <!-- Contact Rapid Grid -->
+        <div class="contact-grid">
+            <!-- Telefon -->
+            <div class="contact-card">
+                <i class="fa-solid fa-phone"></i>
+                <h3>Telefon</h3>
+                <p>Luni - Vineri: 09:00 - 18:00<br>Sâmbătă: 10:00 - 14:00</p>
+                <p class="contact-link" style="background: none; color: #0066cc; font-size: 24px; font-weight: bold;">0767 676 767</p>
+                <a href="tel:0767676767" class="contact-link">Sună acum</a>
+            </div>
+            
+            <!-- Email -->
+            <div class="contact-card">
+                <i class="fa-regular fa-envelope"></i>
+                <h3>Email</h3>
+                <p>Răspundem în maxim 24 de ore<br>în zilele lucrătoare</p>
+                <p style="color: #0066cc; font-weight: bold;">contact@electrostore.ro</p>
+                <a href="mailto:contact@electrostore.ro" class="contact-link">Trimite email</a>
+            </div>
+            
+            <!-- Chat Online -->
+            <div class="contact-card">
+                <i class="fa-regular fa-comment-dots"></i>
+                <h3>Chat Online</h3>
+                <p>Luni - Vineri: 09:00 - 20:00<br>Sâmbătă: 10:00 - 16:00</p>
+                <p style="color: #0066cc; font-weight: bold;">Răspuns instant</p>
+                <a href="#" class="contact-link" onclick="alert('Funcționalitatea de chat va fi disponibilă în curând!')">Deschide chat</a>
+            </div>
+            
+            <!-- WhatsApp -->
+            <div class="contact-card">
+                <i class="fa-brands fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p>Mesaje și asistență rapidă<br>Non-stop</p>
+                <p style="color: #0066cc; font-weight: bold;">0767 676 767</p>
+                <a href="https://wa.me/40767676767" class="contact-link" target="_blank">Mesaj WhatsApp</a>
+            </div>
+        </div>
+        
+        <!-- Formular Contact -->
+        <div class="contact-form-section">
+            <h2 class="form-title">Trimite-ne un mesaj</h2>
+            <form class="contact-form" id="contactForm" onsubmit="return trimiteMesaj(event)">
+                <div class="form-group">
+                    <label for="nume">Nume și Prenume *</label>
+                    <input type="text" id="nume" name="nume" required placeholder="Ex: Popescu Ion">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="exemplu@email.ro">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefon">Telefon</label>
+                    <input type="tel" id="telefon" name="telefon" placeholder="07xx xxx xxx">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subiect">Subiect *</label>
+                    <select id="subiect" name="subiect" required>
+                        <option value="">Selectează un subiect</option>
+                        <option value="comanda">Problemă cu o comandă</option>
+                        <option value="produs">Întrebare despre un produs</option>
+                        <option value="retur">Retur și garanție</option>
+                        <option value="facturare">Facturare</option>
+                        <option value="altceva">Altceva</option>
+                    </select>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="mesaj">Mesajul tău *</label>
+                    <textarea id="mesaj" name="mesaj" required placeholder="Scrie mesajul tău aici..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fa-regular fa-paper-plane"></i> Trimite mesaj
+                </button>
+            </form>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="faq-title">Întrebări frecvente</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fa-regular fa-circle-question"></i>
+                        Cât timp durează livrarea?
+                    </div>
+                    <div class="faq-answer">
+                        Livrarea durează între 1-3 zile lucrătoare pentru produsele în stoc. Pentru produsele în precomandă, termenul de livrare este specificat pe pagina produsului.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fa-regular fa-circle-question"></i>
+                        Cum pot returna un produs?
+                    </div>
+                    <div class="faq-answer">
+                        Ai dreptul la returnare în termen de 14 zile de la primirea produsului. Completează formularul de returnare și vei primi instrucțiuni prin email.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fa-regular fa-circle-question"></i>
+                        Care sunt metodele de plată?
+                    </div>
+                    <div class="faq-answer">
+                        Acceptăm plata cu cardul online, ramburs la livrare, rate fără dobândă prin cardul BRD, și transfer bancar.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fa-regular fa-circle-question"></i>
+                        Cum verific statusul comenzii?
+                    </div>
+                    <div class="faq-answer">
+                        Poți verifica statusul comenzii în secțiunea "Cont" > "Comenzile mele" sau ne poți contacta direct.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hartă -->
+        <div class="map-section">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2849.052345106678!2d27.183256315510873!3d45.69902907910441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35c1f3f0b3b3b%3A0x8b8b8b8b8b8b8b8b!2sFocșani!5e0!3m2!1sro!2sro!4v1620000000000!5m2!1sro!2sro"
+                allowfullscreen=""
+                loading="lazy"
+                title="Locația ElectroStore">
+            </iframe>
+        </div>
+        
+        <!-- Program -->
+        <div class="program-section">
+            <h2 class="program-title">Program de lucru</h2>
+            <div class="program-list">
+                <div class="program-item">
+                    <h4>Luni - Vineri</h4>
+                    <p><i class="fa-regular fa-clock"></i> 09:00 - 18:00</p>
+                    <p><i class="fa-solid fa-phone"></i> 0767 676 767</p>
+                </div>
+                <div class="program-item">
+                    <h4>Sâmbătă</h4>
+                    <p><i class="fa-regular fa-clock"></i> 10:00 - 14:00</p>
+                    <p><i class="fa-solid fa-phone"></i> 0767 676 767</p>
+                </div>
+                <div class="program-item">
+                    <h4>Duminică</h4>
+                    <p><i class="fa-regular fa-clock"></i> Închis</p>
+                    <p><i class="fa-regular fa-envelope"></i> contact@electrostore.ro</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ElectroStore</h4>
+                <p>Magazinul tău de încredere pentru produse electronice de calitate. Oferim laptopuri, telefoane, accesorii și multe altele.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Link-uri utile</h4>
+                <ul class="footer-links">
+                    <li><a href="despre.html">Despre noi</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd" target="_blank">Finanțare BRD</a></li>
+                    <li><a href="retur.html">Retur și garanție</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="footer-contact">
+                    <li><i class="fa-solid fa-location-dot"></i> Bulevardul Gării 25, 627350 Focșani</li>
+                    <li><i class="fa-solid fa-phone"></i> 0767 676 767</li>
+                    <li><i class="fa-solid fa-envelope"></i> contact@electrostore.ro</li>
+                    <li><i class="fa-solid fa-clock"></i> Luni - Vineri: 09:00 - 18:00</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Abonează-te pentru oferte exclusive!</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Adresa ta de email" class="newsletter-input">
+                    <button type="submit" class="newsletter-btn">Abonare</button>
+                </form>
+                <p class="copyright">© 2026 ElectroStore. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript pentru formular -->
+    <script>
+        function trimiteMesaj(event) {
+            event.preventDefault();
+            
+            // Colectează datele din formular
+            let nume = document.getElementById('nume').value;
+            let email = document.getElementById('email').value;
+            let subiect = document.getElementById('subiect').value;
+            
+            // Aici poți adăuga logica pentru trimiterea efectivă a mesajului
+            alert(`Mulțumim ${nume}! Mesajul tău a fost trimis. Te vom contacta în curând pe adresa ${email}.`);
+            
+            // Resetează formularul
+            document.getElementById('contactForm').reset();
+            
+            return false;
+        }
+    </script>
+
+    <!-- Script pentru căutare (același ca în toate paginile) -->
+    <script>
+        function cautaSimplu() {
+            let input = document.getElementById('cautaInput');
+            let rezultate = document.getElementById('rezultateCautare');
+            if (!input || !rezultate) return;
+            
+            let text = input.value.toLowerCase().trim();
+            
+            // LISTA COMPLETĂ DE PRODUSE
+            let produse = [
+                { nume: "MacBook Neo", pret: "3.499,99 lei", link: "apple1.html", imagine: "apple1.webp" },
+                { nume: "iPhone 17e", pret: "3.599,99 lei", link: "apple2.html", imagine: "apple2.webp" },
+                { nume: "iPad Air 11 inch M4", pret: "3.399,99 lei", link: "apple3.html", imagine: "apple3.webp" },
+                { nume: "MacBook Air 15 inch M5", pret: "7.799,99 lei", link: "apple4.html", imagine: "B1.webp" },
+                { nume: "MacBook Air 13 inch M5", pret: "6.299,99 lei", link: "apple5.html", imagine: "S1.webp" },
+                { nume: "AirPods 4", pret: "849,00 lei", link: "apple6.html", imagine: "AirPods1.webp" },
+                { nume: "Laptop Gaming ASUS TUF A15", pret: "3.119,95 lei", link: "produs1.html", imagine: "tuf1.avif" },
+                { nume: "Telefon Samsung Galaxy S25 Ultra", pret: "5.899,99 lei", link: "produs2.html", imagine: "S25U1.avif" },
+                { nume: "Desktop PC APPLE Mac Mini M4", pret: "5.299,90 lei", link: "produs3.html", imagine: "MacMini1.avif" },
+                { nume: "Smartwatch SAMSUNG Galaxy Watch7", pret: "799,00 lei", link: "produs4.html", imagine: "Watch71.avif" },
+                { nume: "Casti SONY WH-1000XM5", pret: "1.049,99 lei", link: "produs5.html", imagine: "Sony1.avif" },
+                { nume: "Consola NINTENDO Switch OLED White", pret: "1.399,99 lei", link: "produs6.html", imagine: "Nitendo1.jpg" },
+                { nume: "Telefon SAMSUNG Galaxy S26", pret: "5.099,99 lei", link: "S26.html", imagine: "S261.avif" },
+                { nume: "Telefon SAMSUNG Galaxy S26+", pret: "6.399,99 lei", link: "S26+.html", imagine: "S26+1.avif" },
+                { nume: "Telefon SAMSUNG Galaxy S26 Ultra", pret: "7.399,99 lei", link: "S26U.html", imagine: "S26U1.avif" },
+                { nume: "Televizor LED Smart SAMSUNG 65", pret: "2.049,99 lei", link: "TV1.html", imagine: "TV11.avif" },
+                { nume: "Televizor Neo QLED MiniLED Smart", pret: "2.599,99 lei", link: "TV2.html", imagine: "TV21.jpg" },
+                { nume: "Televizor LED Smart SAMSUNG 85", pret: "5.099,99 lei", link: "TV3.html", imagine: "TV31.avif" },
+                { nume: "Laptop Gaming ASUS ROG Strix G16", pret: "7.399,99 lei", link: "ROG.html", imagine: "ROG1.jpg" },
+                { nume: "Laptop ASUS Vivobook 16 LED", pret: "4.799,99 lei", link: "Vivobook16Led.html", imagine: "16Led1.jpg" },
+                { nume: "Laptop ASUS Vivobook 16", pret: "2.799,99 lei", link: "Vivobook16.html", imagine: "Vbook1.avif" },
+                { nume: "Laptop ASUS ExpertBook P1", pret: "2.099,99 lei", link: "ExpertBookP1.html", imagine: "Ebook1.avif" },
+                { nume: "Laptop ASUS Zenbook S 14 OLED", pret: "7.699,99 lei", link: "Zenbooks14.html", imagine: "Zbook1.avif" },
+                { nume: "Consola PlayStation 5 Slim", pret: "2.699,99 lei", link: "PS5.html", imagine: "PS1.avif" },
+                { nume: "Consola Microsoft Xbox Series S", pret: "1.899,99 lei", link: "XboxS.html", imagine: "Xbox1.avif" }
+            ];
+            
+            let gasite = [];
+            for (let produs of produse) {
+                if (produs.nume.toLowerCase().includes(text)) {
+                    gasite.push(produs);
+                }
+            }
+            
+            if (gasite.length > 0 && text.length > 0) {
+                let html = '';
+                for (let produs of gasite) {
+                    html += '<div style="display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="window.location.href=\'' + produs.link + '\'">';
+                    html += '   <img src="' + produs.imagine + '" style="width: 45px; height: 45px; object-fit: contain; margin-right: 15px;" onerror="this.src=\'https://placehold.co/45x45/0066cc/white?text=??\'">';
+                    html += '   <div style="flex: 1;">';
+                    html += '       <div style="font-weight: 600; margin-bottom: 4px; color: #333;">' + produs.nume + '</div>';
+                    html += '       <div style="color: #0066cc; font-weight: 500; font-size: 14px;">' + produs.pret + '</div>';
+                    html += '   </div>';
+                    html += '</div>';
+                }
+                rezultate.innerHTML = html;
+                rezultate.style.display = 'block';
+            } else {
+                rezultate.innerHTML = '<div style="padding: 15px; text-align: center; color: #999;">Niciun produs găsit</div>';
+                rezultate.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            let searchBar = document.querySelector('.search-bar');
+            let rezultate = document.getElementById('rezultateCautare');
+            if (searchBar && !searchBar.contains(e.target)) {
+                rezultate.style.display = 'none';
+            }
+        });
+
+        document.getElementById('cautaInput').addEventListener('keyup', function() {
+            cautaSimplu();
+        });
+
+        let searchButton = document.querySelector('.search-button');
+        if (searchButton) {
+            searchButton.addEventListener('click', function() {
+                cautaSimplu();
+            });
+        }
+    </script>
+</body>
+</html>

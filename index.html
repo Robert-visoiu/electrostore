@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="favorite.js" defer></script>
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cos.js">
+</head>
+<body>
+
+
+<header class="header">
+    <div class="header-container">
+        <!-- Logo-ul tău -->
+        <div class="logo">
+            <a href="index.html"></a>
+            <img src="logo.png" alt="ElectroStore" class="logo-img">
+        </div>
+        
+
+    
+        
+  
+
+
+        <!-- Bara de căutare -->
+        <!-- <div class="search-bar">
+            <input type="text" id="cautaInput"  placeholder="Caută produse..." class="search-input"  onkeyup="cautaProduse()">>
+            <button class="search-button" onclick="cautaProduse()">
+        <i class="fa-solid fa-magnifying-glass"></i> Caută
+    </button>
+</div> -->
+
+
+
+
+
+<div class="search-bar" style="position: relative;">
+    <input type="text" id="cautaInput" placeholder="Caută produse..." class="search-input">
+    <button class="search-button" onclick="cautaSimplu()">Caută</button>
+    <div id="rezultateCautare" class="rezultate-cautare" style="display: none; position: absolute; background: white; border: 1px solid #ddd; width: 100%; max-height: 300px; overflow-y: auto; z-index: 1000;"></div>
+</div>
+
+
+
+
+
+<!-- Container pentru rezultatele căutării (apare sub bara de căutare) -->
+<div id="rezultateCautare" class="rezultate-cautare"></div>
+       
+        
+        <div class="user-actions">
+    <a href="cont.html" class="icon-link">
+        <i class="fa-regular fa-user"></i> 
+        <span>Cont</span>
+    </a>
+    <!-- ACESTA e link-ul către pagina de favorite -->
+    <a href="favorite.html" class="icon-link" id="favorite-link">
+        <i class="fa-regular fa-heart"></i> 
+        <span>Favorite</span>
+    </a>
+  <!-- ACEASTA ESTE LINIA PENTRU COȘ -->
+    <a href="cos.html" class="icon-link" id="cos-link">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Coș</span>
+    </a>
+</div>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+<!-- Buton hamburger - DOAR PE MOBIL -->
+<button class="menu-toggle" id="menuToggle">
+    ☰ &nbsp; Meniu
+</button>
+
+
+
+<!-- NOUL MENIU DE CATEGORII -->
+<nav class="main-menu">
+    <div class="menu-container">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="produse.html">Produse</a></li>
+            <li class="menu-item"><a href="precomanda.html">Precomanda Apple</a></li>
+            
+            <li class="menu-item"><a href="index.html">Acasa</a></li>
+            <li class="menu-item dropdown">
+
+
+                <a href="#">Finantare <i class="fa-solid fa-chevron-down"></i></a>
+                <!-- Submeniu (opțional) -->
+                <ul class="dropdown-menu">
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd">Rate fără dobândă</a></li>
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd">Credit online</a></li>
+                    <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd">Leasing</a></li>
+                </ul>
+
+
+            </li>
+            <li class="menu-item"><a href="contact.html">Suport clienti</a></li>
+            <li class="menu-item"><a href="despre.html">Despre noi</a></li>
+           
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+<div class="carousel-container">
+    <div class="carousel-track">
+        <div class="carousel-slide">
+            <a href="precomanda.html">
+            <img src="oferta1.png" alt="Reclamă 1">
+        </a></div>
+
+        <div class="carousel-slide">
+            <a href="precomanda.html">
+            <img src="oferta2.png" alt="Reclamă 2">
+        </a></div>
+
+        <div class="carousel-slide">
+            <a href="precomanda.html">
+            <img src="oferta3.png" alt="Reclamă 3">
+        </a></div>
+    </div>
+    
+    <!-- Buline indicator (doar pentru design) -->
+    <div class="carousel-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- SECȚIUNE TOP OFERTE -->
+<section class="top-oferte">
+    <h2 class="section-title">Top Oferte</h2>
+    
+    <div class="produse-grid">
+        <!-- Produs 1 - Laptop -->
+        <a href="produs1.html" class="produs-link">
+        <!-- conținutul produsului -->
+            <div class="produs-card">
+                <div class="produs-badge">-20%</div>
+                <img src="produs1.avif" alt="Laptop Gaming ASUS">
+                <h3>Laptop Gaming ASUS TUF A15</h3>
+                <p class="descriere">Procesor AMD Ryzen 5 7535HS, 16GB RAM, SSD 512GB, placă video dedicată...</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 130 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">3.899,90 lei</span>
+                    <span class="pret-nou">3.119,95 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 2 - Telefon -->
+        <a href="produs2.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-1000 lei</div>
+                <img src="produs2.avif" alt="Telefon Samsung Galaxy S25 Ultra">
+                <h3>Telefon Samsung Galaxy S25 Ultra</h3>
+                <p class="descriere">5G, 512GB, 12GB RAM, Dual SIM, Titanium Jet Black, 50MP...</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 245 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">6.899,99 lei</span>
+                    <span class="pret-nou">5.899,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 3 - Mac -->
+        <a href="produs3.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-500 lei</div>
+                <img src="produs3.avif" alt="Mac">
+                <h3>Desktop PC APPLE Mac Mini M4</h3>
+                <p class="descriere">Apple M4, 24GB, SSD 512GB, 10-core GPU, macOS</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 160 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">5.799,00 lei</span>
+                    <span class="pret-nou">5.299,90 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 4 - Smartwatch -->
+        <a href="produs4.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-30%</div>
+                <img src="produs4.avif" alt="Watch">
+                <h3>Smartwatch SAMSUNG Galaxy Watch7</h3>
+                <p class="descriere">44mm, LTE, Wi-Fi, Android, Silver, GPS, monitorizare sănătate...</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 28 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">1.099,00 lei</span>
+                    <span class="pret-nou">799,00 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 5 - Casti -->
+        <a href="produs5.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-350 lei</div>
+                <img src="produs5.avif" alt="Casti">
+                <h3>Casti SONY WH-1000XM5</h3>
+                <p class="descriere">Bluetooth, Over-ear, Microfon, Noise Cancelling, argintiu...</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 35 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">1.399,99 lei</span>
+                    <span class="pret-nou">1.049,99 lei</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Produs 6 - Nitendo -->
+        <a href="produs6.html" class="produs-link">
+            <div class="produs-card">
+                <div class="produs-badge">-400 lei</div>
+                <img src="produs6.jpg" alt="Nitendo">
+                <h3>Consola NINTENDO Switch OLED White</h3>
+                <p class="descriere">Ecran OLED de 7 inchi, 64 GB stocare interna, Alb</p>
+                <div class="stoc">✅ In stoc</div>
+                <div class="rate">De la 43 lei/lună</div>
+                <div class="pret-container">
+                    <span class="pret-vechi">1.799,99 lei</span>
+                    <span class="pret-nou">1.399,99 lei</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="banner">
+    <img src="../imagini/banner.png" alt="Banner Promoțional">
+</div> -->
+
+
+    <!-- <header class="header">
+    <div class="logo-container">
+        <img src="../imagini/logo.png" alt="Logo Firma" class="logo-img">
+        <h1 class="site-title">ElectroStore</h1>
+    </div>
+    </header>
+ -->
+
+    
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Coloana 1 - Despre -->
+        <div class="footer-col">
+            <h4>ElectroStore</h4>
+            <p>Magazinul tău de încredere pentru produse electronice de calitate. Oferim laptopuri, telefoane, accesorii și multe altele.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+        
+        <!-- Coloana 2 - Link-uri utile -->
+        <div class="footer-col">
+            <h4>Link-uri utile</h4>
+            <ul class="footer-links">
+                <li><a href="despre.html">Despre noi</a></li>
+                <li><a href="despre.html">Contact</a></li>
+               <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd" target="_blank">Finanțare BRD</a></li>
+                <li><a href="retur.html">Retur și garanție</a></li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 3 - Contact -->
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-contact">
+                <li><i class="fa-solid fa-location-dot"></i>  Bulevardul Gării 25, 627350 Focșani</li>
+                <li><i class="fa-solid fa-phone"></i> 0767 676 767</li>
+                <li><i class="fa-solid fa-envelope"></i> contact@electrostore.ro</li>
+                <li><i class="fa-solid fa-clock"></i> Luni - Vineri: 09:00 - 18:00</li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 4 - Newsletter -->
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>Abonează-te pentru oferte exclusive!</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Adresa ta de email" class="newsletter-input">
+                <button type="submit" class="newsletter-btn">Abonare</button>
+            </form>
+            <p class="copyright">© 2026 ElectroStore. Toate drepturile rezervate.</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+<script>
+// ========== SISTEM COȘ ==========
+let cos = JSON.parse(localStorage.getItem('cos')) || [];
+
+// Actualizează badge-ul în header
+function actualizeazaBadgeCos() {
+    let iconCos = document.querySelector('.fa-cart-shopping');
+    if (iconCos) {
+        let parent = iconCos.closest('.icon-link');
+        if (!parent) return;
+        
+        // Elimină badge-ul vechi
+        let badgeVechi = document.querySelector('.cos-badge');
+        if (badgeVechi) badgeVechi.remove();
+        
+        // Adaugă badge nou doar dacă sunt produse
+        if (cos.length > 0) {
+            let badge = document.createElement('span');
+            badge.className = 'cos-badge';
+            badge.textContent = cos.length;
+            parent.style.position = 'relative';
+            parent.appendChild(badge);
+        }
+    }
+}
+
+// Rulează la încărcarea paginii
+document.addEventListener('DOMContentLoaded', function() {
+    actualizeazaBadgeCos();
+});
+
+// Pentru favorite (dacă vrei și acolo)
+let favorite = JSON.parse(localStorage.getItem('favorite')) || [];
+
+function actualizeazaBadgeFavorite() {
+    let iconInima = document.querySelector('.fa-heart');
+    if (iconInima) {
+        let parent = iconInima.closest('.icon-link');
+        let badgeVechi = document.querySelector('.favorite-badge');
+        if (badgeVechi) badgeVechi.remove();
+        
+        if (favorite.length > 0) {
+            let badge = document.createElement('span');
+            badge.className = 'favorite-badge';
+            badge.textContent = favorite.length;
+            parent.style.position = 'relative';
+            parent.appendChild(badge);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    actualizeazaBadgeCos();
+    actualizeazaBadgeFavorite();
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <main>
+    <h2>Bine ai venit la ElectroStore!</h2>
+    <p>Vindem produse electronice de calitate, laptopuri, telefoane și accesorii.</p>
+</main>
+
+<footer>
+    <p>© 2026 ElectroStore</p>
+</footer> -->
+
+
+
+
+
+
+
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+<script>
+function cautaSimplu() {
+    let input = document.getElementById('cautaInput');
+    let rezultate = document.getElementById('rezultateCautare');
+    let text = input.value.toLowerCase().trim();
+    
+    // Lista produselor - FĂRĂ VIRGULE ÎN PLUS
+    let produse = [
+        { 
+            nume: "MacBook Neo", 
+            pret: "3.499,99 lei", 
+            link: "apple1.html",
+            imagine: "apple1.webp" 
+        },
+        { 
+            nume: "Laptop Gaming ASUS TUF A15", 
+            pret: "3.119,95 lei", 
+            link: "produs1.html",
+            imagine: "produs1.avif" 
+        },
+        { 
+            nume: "Telefon SAMSUNG Galaxy S25 Ultra ", 
+            pret: "5.899,99 lei", 
+            link: "produs2.html",
+            imagine: "produs2.avif" 
+        },
+        { 
+            nume: "Desktop PC APPLE Mac Mini M4", 
+            pret: "5.299,99 lei", 
+            link: "produs3.html",
+            imagine: "produs3.avif" 
+        },
+        { 
+            nume: "Smartwatch SAMSUNG Galaxy Watch7", 
+            pret: "799,00 lei", 
+            link: "produs4.html",
+            imagine: "produs4.avif" 
+        },
+        { 
+            nume: "Casti SONY WH-1000XM5", 
+            pret: "1.049,99 lei", 
+            link: "produs5.html",
+            imagine: "produs5.avif" 
+        },
+        { 
+            nume: "Consola NINTENDO Switch OLED White", 
+            pret: "1.399,99 lei", 
+            link: "produs6.html",
+            imagine: "produs6.jpg" 
+        },
+        { 
+            nume: "iPhone 17e", 
+            pret: "3.599,99 lei", 
+            link: "apple2.html",
+            imagine: "apple2.webp" 
+        },
+        { 
+            nume: "iPad Air 11 inch M4", 
+            pret: "3.399,99 lei", 
+            link: "apple3.html",
+            imagine: "apple3.webp" 
+        },
+        { 
+            nume: "MacBook Air 15 inch M5", 
+            pret: "7.799,99 lei", 
+            link: "apple4.html",
+            imagine: "apple4.webp" 
+        },
+        { 
+            nume: "MacBook Air 13 inch M5", 
+            pret: "6.299,99 lei", 
+            link: "apple5.html",
+            imagine: "apple5.webp" 
+        },
+        { 
+            nume: "AirPods 4", 
+            pret: "849,00 lei", 
+            link: "apple6.html",
+            imagine: "apple6.webp" 
+        },
+        { 
+            nume: "Telefon SAMSUNG Galaxy S26", 
+            pret: "5.099,99 lei", 
+            link: "S26.html",
+            imagine: "S261.avif" 
+        },
+        { 
+            nume: "Telefon SAMSUNG Galaxy S26+", 
+            pret: "6.399,99 lei", 
+            link: "S26+.html",
+            imagine: "S26+1.avif" 
+        },
+        
+        { 
+            nume: "Telefon SAMSUNG Galaxy S26 Ultra", 
+            pret: "7.399,99 lei", 
+            link: "S26U.HTML",
+            imagine: "S26U1.avif" 
+        },
+        { 
+            nume: "Televizor LED Smart SAMSUNG", 
+            pret: "2.049,99 lei", 
+            link: "TV1.html",
+            imagine: "TV11.avif" 
+        },
+        { 
+            nume: "Televizor Neo QLED MiniLED Smart", 
+            pret: "2.599,99 lei", 
+            link: "TV2.html",
+            imagine: "TV21.jpg" 
+        },
+        { 
+            nume: "Televizor LED Smart SAMSUNG", 
+            pret: "5.099,99 lei", 
+            link: "TV3.html",
+            imagine: "TV31.avif" 
+        },
+        { 
+            nume: "Laptop Gaming ASUS ROG Strix G16", 
+            pret: "7.399,99 lei", 
+            link: "ROG.html",
+            imagine: "ROG1.jpg" 
+        },
+        { 
+            nume: "Laptop ASUS Vivobook 16 LED", 
+            pret: "4.799,99 lei", 
+            link: "/Vivobook16Led.html",
+            imagine: "16Led1.jpg" 
+        },
+        { 
+            nume: "Laptop ASUS Vivobook 16", 
+            pret: "2.799,99 lei", 
+            link: "Vivobook16.html",
+            imagine: "Vbook1.avif" 
+        },
+        { 
+            nume: "Laptop ASUS ExpertBook P1", 
+            pret: "2.099,99 lei", 
+            link: "ExpertBookP1.html",
+            imagine: "Ebook1.avif" 
+        },
+        { 
+            nume: "Laptop ASUS Zenbook S 14 OLED", 
+            pret: "7.699,99 lei", 
+            link: "Zenbooks14.html",
+            imagine: "Zbook1.avif" 
+        },
+        { 
+            nume: "Consola PlayStation 5 Slim", 
+            pret: "2.699,99 lei", 
+            link: "PS5.html",
+            imagine: "PS1.avif" 
+        },
+        { 
+            nume: "Consola Microsoft Xbox Series S", 
+            pret: "1.899,99 lei", 
+            link: "XboxS.html",
+            imagine: "Xbox1.avif" 
+        }
+    
+       
+]; 
+
+     
+    
+    // Caută produse
+    let gasite = [];
+    for (let produs of produse) {
+        if (produs.nume.toLowerCase().includes(text)) {
+            gasite.push(produs);
+        }
+    }
+    
+    // Afișează rezultate
+    if (gasite.length > 0 && text.length > 0) {
+        let html = '';
+        for (let produs of gasite) {
+            html += '<div style="display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="window.location.href=\'' + produs.link + '\'">';
+            html += '   <img src="' + produs.imagine + '" style="width: 45px; height: 45px; object-fit: contain; margin-right: 15px;" onerror="this.src=\'https://placehold.co/45x45/0066cc/white?text=??\'">';
+            html += '   <div style="flex: 1;">';
+            html += '       <div style="font-weight: 600; margin-bottom: 4px; color: #333;">' + produs.nume + '</div>';
+            html += '       <div style="color: #0066cc; font-weight: 500; font-size: 14px;">' + produs.pret + '</div>';
+            html += '   </div>';
+            html += '</div>';
+        }
+        rezultate.innerHTML = html;
+        rezultate.style.display = 'block';
+    } else {
+        rezultate.innerHTML = '<div style="padding: 15px; text-align: center; color: #999;">Niciun produs găsit</div>';
+        rezultate.style.display = 'block';
+    }
+}
+
+// Ascunde la click în afară
+document.addEventListener('click', function(e) {
+    let searchBar = document.querySelector('.search-bar');
+    let rezultate = document.getElementById('rezultateCautare');
+    if (searchBar && !searchBar.contains(e.target)) {
+        rezultate.style.display = 'none';
+    }
+});
+
+// Caută în timp real
+document.getElementById('cautaInput').addEventListener('keyup', function() {
+    cautaSimplu();
+});
+
+// Caută la click pe buton
+let searchButton = document.querySelector('.search-button');
+if (searchButton) {
+    searchButton.addEventListener('click', function() {
+        cautaSimplu();
+    });
+}
+</script>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<script>
+// Hamburger menu
+document.getElementById('menuToggle').addEventListener('click', function() {
+    let menu = document.querySelector('.main-menu');
+    menu.classList.toggle('show');
+});
+
+// Dropdown pe mobil
+document.querySelectorAll('.dropdown > a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            this.closest('.dropdown').classList.toggle('open');
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

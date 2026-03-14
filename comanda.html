@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizare Comandă - ElectroStore</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Stiluri suplimentare pentru pagina de comandă */
+        .checkout-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: #0066cc;
+        }
+        
+        /* Layout principal */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+        
+        /* Secțiuni formular */
+        .checkout-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #0066cc;
+            font-size: 20px;
+        }
+        
+        .section-number {
+            width: 30px;
+            height: 30px;
+            background: #0066cc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* Grid formulare */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 5px;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        
+        .form-group input.error {
+            border-color: #ff4444;
+        }
+        
+        /* Radio și checkbox */
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .radio-group input,
+        .checkbox-group input {
+            width: auto;
+        }
+        
+        /* Metode plată */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+        
+        .payment-method.selected {
+            border-color: #0066cc;
+            background: #f0f7ff;
+        }
+        
+        .payment-method input {
+            margin-right: 15px;
+        }
+        
+        .payment-method img {
+            height: 30px;
+            margin-right: 15px;
+        }
+        
+        .payment-method-info {
+            flex: 1;
+        }
+        
+        .payment-method-title {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .payment-method-desc {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* Sumar comandă */
+        .order-summary {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 25px;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .summary-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .summary-item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        
+        .summary-item-info {
+            flex: 1;
+        }
+        
+        .summary-item-name {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        
+        .summary-item-price {
+            font-size: 14px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .summary-item-qty {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .summary-row.total {
+            padding: 15px 0;
+            margin-top: 10px;
+            border-top: 2px solid #eee;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .summary-row.total .price {
+            color: #0066cc;
+            font-size: 22px;
+        }
+        
+        /* Cod promo */
+        .promo-code {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .promo-code input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .promo-code button {
+            padding: 12px 20px;
+            background: #f5f5f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .promo-code button:hover {
+            background: #e8e8ed;
+        }
+        
+        /* Buton finalizare */
+        .place-order-btn {
+            width: 100%;
+            padding: 16px;
+            background: #00aa00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+        
+        .place-order-btn:hover {
+            background: #008800;
+        }
+        
+        .place-order-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Badge livrare */
+        .delivery-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e6ffe6;
+            color: #00aa00;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Error messages */
+        .error-message {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 3px;
+            display: none;
+        }
+        
+        /* Secțiune autentificare */
+        .login-prompt {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .login-prompt a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            
+            .order-summary {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER COMPLET -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="ElectroStore" class="logo-img">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="cautaInput" placeholder="Caută produse..." class="search-input">
+                <button class="search-button" onclick="cautaSimplu()">Caută</button>
+                <div id="rezultateCautare" class="rezultate-cautare"></div>
+            </div>
+            <div class="user-actions">
+                <a href="cont.html" class="icon-link"><i class="fa-regular fa-user"></i><span>Cont</span></a>
+                <a href="favorite.html" class="icon-link"><i class="fa-regular fa-heart"></i><span>Favorite</span></a>
+                <a href="cos.html" class="icon-link"><i class="fa-solid fa-cart-shopping"></i><span>Coș</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENIU CATEGORII -->
+    <nav class="main-menu">
+        <div class="menu-container">
+            <ul class="menu-list">
+                <li class="menu-item"><a href="produse.html">Produse</a></li>
+                <li class="menu-item"><a href="precomanda.html">Precomanda Apple</a></li>
+                <li class="menu-item"><a href="index.html">Acasa</a></li>
+                <li class="menu-item dropdown">
+                    <a href="#">Finantare <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.brd.ro" target="_blank">Rate fără dobândă</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Credit online</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Leasing</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="contact.html">Suport clienti</a></li>
+                <li class="menu-item"><a href="despre.html">Despre noi</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PAGINA FINALIZARE COMANDĂ -->
+    <div class="checkout-page">
+        <h1 class="page-title">
+            <i class="fa-regular fa-credit-card" style="margin-right: 10px; color: #0066cc;"></i>
+            Finalizare Comandă
+        </h1>
+        
+        <!-- Verificare coș gol -->
+        <div id="emptyCartMessage" style="display: none; text-align: center; padding: 60px; background: white; border-radius: 10px;">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 80px; color: #ddd; margin-bottom: 20px;"></i>
+            <h2>Coșul tău este gol</h2>
+            <p style="color: #666; margin-bottom: 30px;">Adaugă produse în coș înainte de a finaliza comanda.</p>
+            <a href="index.html" style="display: inline-block; padding: 12px 30px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">Continuă cumpărăturile</a>
+        </div>
+        
+        <!-- Conținut comandă -->
+        <div id="checkoutContent">
+            <!-- Login prompt -->
+            <div class="login-prompt" id="loginPrompt">
+                <span><i class="fa-regular fa-user"></i> Ești deja client? </span>
+                <a href="cont.html">Autentifică-te</a>
+            </div>
+            
+            <div class="checkout-container">
+                <!-- Stânga - Formular comandă -->
+                <div class="checkout-form">
+                    <!-- Secțiune 1: Date livrare -->
+                    <div class="checkout-section">
+                        <div class="section-title">
+                            <span class="section-number">1</span>
+                            <i class="fa-solid fa-truck"></i>
+                            Adresă de livrare
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="fullName">Nume și prenume *</label>
+                                <input type="text" id="fullName" placeholder="Ex: Popescu Ion" value="Popescu Ion">
+                                <div class="error-message" id="fullNameError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" placeholder="exemplu@email.ro" value="ion.popescu@email.ro">
+                                <div class="error-message" id="emailError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Telefon *</label>
+                                <input type="tel" id="phone" placeholder="07xx xxx xxx" value="0767 676 767">
+                                <div class="error-message" id="phoneError"></div>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="address">Adresă *</label>
+                                <input type="text" id="address" placeholder="Stradă, număr" value="Bulevardul Gării 25">
+                                <div class="error-message" id="addressError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="city">Oraș *</label>
+                                <input type="text" id="city" placeholder="Oraș" value="Focșani">
+                                <div class="error-message" id="cityError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="county">Județ *</label>
+                                <input type="text" id="county" placeholder="Județ" value="Vrancea">
+                                <div class="error-message" id="countyError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="postalCode">Cod poștal</label>
+                                <input type="text" id="postalCode" placeholder="Ex: 620000" value="627350">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="country">Țară</label>
+                                <input type="text" id="country" value="România" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-group" style="margin-top: 15px;">
+                            <input type="checkbox" id="saveAddress" checked>
+                            <label for="saveAddress">Salvează această adresă pentru viitoarele comenzi</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Secțiune 2: Metodă livrare -->
+                    <div class="checkout-section">
+                        <div class="section-title">
+                            <span class="section-number">2</span>
+                            <i class="fa-solid fa-box-open"></i>
+                            Metodă de livrare
+                        </div>
+                        
+                        <div class="radio-group">
+                            <input type="radio" name="shipping" id="shippingStandard" checked>
+                            <label for="shippingStandard">
+                                <strong>Curier standard</strong> (3-5 zile lucrătoare) - <strong>19,90 lei</strong>
+                            </label>
+                        </div>
+                        
+                        <div class="radio-group">
+                            <input type="radio" name="shipping" id="shippingExpress">
+                            <label for="shippingExpress">
+                                <strong>Curier express</strong> (1-2 zile lucrătoare) - <strong>29,90 lei</strong>
+                            </label>
+                        </div>
+                        
+                        <div class="radio-group">
+                            <input type="radio" name="shipping" id="shippingPickup">
+                            <label for="shippingPickup">
+                                <strong>Ridicare personală</strong> (Showroom Focșani) - <strong>Gratuit</strong>
+                            </label>
+                        </div>
+                        
+                        <div class="delivery-badge" style="margin-top: 10px;">
+                            <i class="fa-regular fa-clock"></i> Comandă în aceeași zi pentru produse în stoc până la 14:00
+                        </div>
+                    </div>
+                    
+                    <!-- Secțiune 3: Metodă plată -->
+                    <div class="checkout-section">
+                        <div class="section-title">
+                            <span class="section-number">3</span>
+                            <i class="fa-regular fa-credit-card"></i>
+                            Metodă de plată
+                        </div>
+                        
+                        <div class="payment-methods">
+                            <label class="payment-method selected">
+                                <input type="radio" name="payment" value="card" checked style="display: none;">
+                                <img src="https://placehold.co/50x30/0066cc/white?text=Card" alt="Card">
+                                <div class="payment-method-info">
+                                    <div class="payment-method-title">Card bancar</div>
+                                    <div class="payment-method-desc">Visa, Mastercard, Maestro</div>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="ramburs" style="display: none;">
+                                <img src="https://placehold.co/50x30/00aa00/white?text=Ramb" alt="Ramburs">
+                                <div class="payment-method-info">
+                                    <div class="payment-method-title">Ramburs</div>
+                                    <div class="payment-method-desc">Plătești la livrare</div>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="rate" style="display: none;">
+                                <img src="https://placehold.co/50x30/ff9900/white?text=Rate" alt="Rate">
+                                <div class="payment-method-info">
+                                    <div class="payment-method-title">Rate fără dobândă</div>
+                                    <div class="payment-method-desc">prin cardul BRD</div>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="transfer" style="display: none;">
+                                <img src="https://placehold.co/50x30/999999/white?text=BT" alt="Transfer">
+                                <div class="payment-method-info">
+                                    <div class="payment-method-title">Transfer bancar</div>
+                                    <div class="payment-method-desc">în avans</div>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div style="margin-top: 15px; font-size: 13px; color: #999;">
+                            <i class="fa-solid fa-lock"></i> Toate tranzacțiile sunt securizate
+                        </div>
+                    </div>
+                    
+                    <!-- Secțiune 4: Observații -->
+                    <div class="checkout-section">
+                        <div class="section-title">
+                            <span class="section-number">4</span>
+                            <i class="fa-regular fa-note-sticky"></i>
+                            Observații
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="notes" rows="3" placeholder="Lasă un mesaj pentru curier (opțional)"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dreapta - Sumar comandă -->
+                <div class="order-summary" id="orderSummary">
+                    <h3 class="summary-title">Sumar comandă</h3>
+                    
+                    <div class="summary-items" id="summaryItems">
+                        <!-- Produsele se vor încărca aici din JavaScript -->
+                    </div>
+                    
+                    <!-- Cod promo -->
+                    <div class="promo-code">
+                        <input type="text" id="promoCode" placeholder="Cod promoțional">
+                        <button onclick="applyPromo()">Aplică</button>
+                    </div>
+                    <div id="promoMessage" style="font-size: 12px; margin-bottom: 10px;"></div>
+                    
+                    <!-- Totaluri -->
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">0,00 lei</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Transport</span>
+                        <span id="shippingCost">19,90 lei</span>
+                    </div>
+                    
+                    <div class="summary-row" id="discountRow" style="display: none;">
+                        <span>Discount</span>
+                        <span id="discount">0,00 lei</span>
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span class="price" id="total">0,00 lei</span>
+                    </div>
+                    
+                    <!-- Checkbox termeni -->
+                    <div class="checkbox-group" style="margin: 15px 0;">
+                        <input type="checkbox" id="terms" checked>
+                        <label for="terms">Am citit și sunt de acord cu <a href="#" onclick="showTerms()">Termenii și Condițiile</a></label>
+                    </div>
+                    
+                    <!-- Buton finalizare -->
+                    <button class="place-order-btn" onclick="placeOrder()" id="placeOrderBtn">
+                        <i class="fa-regular fa-circle-check"></i> Finalizează comanda
+                    </button>
+                    
+                    <p style="font-size: 12px; color: #999; text-align: center; margin-top: 15px;">
+                        <i class="fa-solid fa-lock"></i> Datele tale sunt în siguranță
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ElectroStore</h4>
+                <p>Magazinul tău de încredere pentru produse electronice de calitate.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Link-uri utile</h4>
+                <ul class="footer-links">
+                    <li><a href="despre.html">Despre noi</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://www.brd.ro" target="_blank">Finanțare BRD</a></li>
+                    <li><a href="retur.html">Retur și garanție</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="footer-contact">
+                    <li><i class="fa-solid fa-location-dot"></i> Bulevardul Gării 25, Focșani</li>
+                    <li><i class="fa-solid fa-phone"></i> 0767 676 767</li>
+                    <li><i class="fa-solid fa-envelope"></i> contact@electrostore.ro</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Abonează-te pentru oferte exclusive!</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email" class="newsletter-input">
+                    <button type="submit" class="newsletter-btn">Abonare</button>
+                </form>
+                <p class="copyright">© 2026 ElectroStore</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript pentru funcționalitate -->
+    <script>
+        // Variabile globale
+        let cos = [];
+        let discountApplied = false;
+        let currentUser = null;
+        
+        // Inițializare
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            checkUser();
+            setupPaymentMethods();
+            loadSearchFunction();
+        });
+        
+        // Încarcă produsele din coș
+        function loadCart() {
+            cos = JSON.parse(localStorage.getItem('cos')) || [];
+            
+            if (cos.length === 0) {
+                document.getElementById('checkoutContent').style.display = 'none';
+                document.getElementById('emptyCartMessage').style.display = 'block';
+                return;
+            }
+            
+            displaySummary();
+        }
+        
+        // Afișează sumarul comenzii
+        function displaySummary() {
+            let summaryHtml = '';
+            let subtotal = 0;
+            
+            for (let produs of cos) {
+                let pretNumar = parseFloat(produs.pret.replace(/[^0-9,]/g, '').replace(',', '.'));
+                let cantitate = produs.cantitate || 1;
+                subtotal += pretNumar * cantitate;
+                
+                summaryHtml += `
+                    <div class="summary-item">
+                        <img src="${produs.imagine}" alt="${produs.nume}" class="summary-item-img">
+                        <div class="summary-item-info">
+                            <div class="summary-item-name">${produs.nume}</div>
+                            <div class="summary-item-price">${produs.pret}</div>
+                            <div class="summary-item-qty">Cantitate: ${cantitate}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('summaryItems').innerHTML = summaryHtml;
+            document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            
+            updateTotal();
+        }
+        
+        // Actualizează totalul
+        function updateTotal() {
+            let subtotal = parseFloat(document.getElementById('subtotal').textContent.replace(' lei', '').replace('.', '').replace(',', '.'));
+            let shipping = getShippingCost();
+            let discount = discountApplied ? subtotal * 0.1 : 0; // 10% discount
+            
+            document.getElementById('shippingCost').textContent = formatPrice(shipping);
+            
+            if (discountApplied) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discount').textContent = '-' + formatPrice(discount);
+            } else {
+                document.getElementById('discountRow').style.display = 'none';
+            }
+            
+            let total = subtotal + shipping - discount;
+            document.getElementById('total').textContent = formatPrice(total);
+        }
+        
+        // Obține costul transportului
+        function getShippingCost() {
+            let shippingMethod = document.querySelector('input[name="shipping"]:checked');
+            if (!shippingMethod) return 19.90;
+            
+            switch(shippingMethod.id) {
+                case 'shippingStandard': return 19.90;
+                case 'shippingExpress': return 29.90;
+                case 'shippingPickup': return 0;
+                default: return 19.90;
+            }
+        }
+        
+        // Formatare preț
+        function formatPrice(price) {
+            return price.toFixed(2).replace('.', ',') + ' lei';
+        }
+        
+        // Aplică cod promoțional
+        function applyPromo() {
+            let code = document.getElementById('promoCode').value.trim();
+            let message = document.getElementById('promoMessage');
+            
+            if (code.toLowerCase() === 'welcome10' || code.toLowerCase() === 'electro10') {
+                discountApplied = true;
+                message.innerHTML = '<span style="color: #00aa00;">✅ Cod aplicat cu succes! 10% discount</span>';
+                updateTotal();
+            } else if (code.toLowerCase() === 'freeship') {
+                discountApplied = true;
+                message.innerHTML = '<span style="color: #00aa00;">✅ Cod aplicat! Transport gratuit</span>';
+                // Ajustează transportul
+                let shippingRadios = document.querySelectorAll('input[name="shipping"]');
+                shippingRadios.forEach(radio => {
+                    if (radio.id !== 'shippingPickup') {
+                        radio.disabled = true;
+                    }
+                });
+                document.getElementById('shippingPickup').checked = true;
+                updateTotal();
+            } else if (code) {
+                message.innerHTML = '<span style="color: #ff4444;">❌ Cod invalid</span>';
+            } else {
+                message.innerHTML = '';
+            }
+        }
+        
+        // Setup metode plată
+        function setupPaymentMethods() {
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+        }
+        
+        // Verifică utilizator
+        function checkUser() {
+            let user = localStorage.getItem('currentUser');
+            if (user) {
+                currentUser = JSON.parse(user);
+                // Completează câmpurile cu datele utilizatorului
+                if (currentUser.firstName && currentUser.lastName) {
+                    document.getElementById('fullName').value = currentUser.firstName + ' ' + currentUser.lastName;
+                }
+                if (currentUser.email) {
+                    document.getElementById('email').value = currentUser.email;
+                }
+                if (currentUser.phone) {
+                    document.getElementById('phone').value = currentUser.phone;
+                }
+                document.getElementById('loginPrompt').style.display = 'none';
+            }
+        }
+        
+        // Validare formular
+        function validateForm() {
+            let isValid = true;
+            
+            // Validare nume
+            let fullName = document.getElementById('fullName');
+            if (!fullName.value.trim()) {
+                showError('fullName', 'Numele este obligatoriu');
+                isValid = false;
+            } else {
+                hideError('fullName');
+            }
+            
+            // Validare email
+            let email = document.getElementById('email');
+            if (!email.value.trim()) {
+                showError('email', 'Emailul este obligatoriu');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                showError('email', 'Emailul nu este valid');
+                isValid = false;
+            } else {
+                hideError('email');
+            }
+            
+            // Validare telefon
+            let phone = document.getElementById('phone');
+            if (!phone.value.trim()) {
+                showError('phone', 'Telefonul este obligatoriu');
+                isValid = false;
+            } else {
+                hideError('phone');
+            }
+            
+            // Validare adresă
+            let address = document.getElementById('address');
+            if (!address.value.trim()) {
+                showError('address', 'Adresa este obligatorie');
+                isValid = false;
+            } else {
+                hideError('address');
+            }
+            
+            // Validare oraș
+            let city = document.getElementById('city');
+            if (!city.value.trim()) {
+                showError('city', 'Orașul este obligatoriu');
+                isValid = false;
+            } else {
+                hideError('city');
+            }
+            
+            // Validare județ
+            let county = document.getElementById('county');
+            if (!county.value.trim()) {
+                showError('county', 'Județul este obligatoriu');
+                isValid = false;
+            } else {
+                hideError('county');
+            }
+            
+            // Validare termeni
+            let terms = document.getElementById('terms');
+            if (!terms.checked) {
+                alert('Trebuie să accepți termenii și condițiile pentru a continua.');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        function showError(fieldId, message) {
+            let field = document.getElementById(fieldId);
+            let error = document.getElementById(fieldId + 'Error');
+            field.classList.add('error');
+            if (error) {
+                error.textContent = message;
+                error.style.display = 'block';
+            }
+        }
+        
+        function hideError(fieldId) {
+            let field = document.getElementById(fieldId);
+            let error = document.getElementById(fieldId + 'Error');
+            field.classList.remove('error');
+            if (error) {
+                error.style.display = 'none';
+            }
+        }
+        
+        // Plasează comanda
+        function placeOrder() {
+            if (!validateForm()) return;
+            
+            if (cos.length === 0) {
+                alert('Coșul tău este gol!');
+                return;
+            }
+            
+            // Colectează datele comenzii
+            let orderData = {
+                id: 'ORD' + Date.now(),
+                date: new Date().toISOString(),
+                customer: {
+                    name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: {
+                        street: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        county: document.getElementById('county').value,
+                        postalCode: document.getElementById('postalCode').value,
+                        country: document.getElementById('country').value
+                    }
+                },
+                shipping: {
+                    method: document.querySelector('input[name="shipping"]:checked').nextElementSibling.textContent.trim(),
+                    cost: getShippingCost()
+                },
+                payment: {
+                    method: document.querySelector('input[name="payment"]:checked').value
+                },
+                products: cos,
+                subtotal: parseFloat(document.getElementById('subtotal').textContent.replace(' lei', '').replace('.', '').replace(',', '.')),
+                discount: discountApplied ? parseFloat(document.getElementById('discount').textContent.replace('-', '').replace(' lei', '').replace('.', '').replace(',', '.')) : 0,
+                total: parseFloat(document.getElementById('total').textContent.replace(' lei', '').replace('.', '').replace(',', '.')),
+                notes: document.getElementById('notes').value,
+                status: 'În procesare'
+            };
+            
+            // Salvează comanda în localStorage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(orderData);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // Golește coșul
+            localStorage.removeItem('cos');
+            
+            // Redirecționează la pagina de succes
+            window.location.href = 'comanda-succes.html?id=' + orderData.id;
+        }
+        
+        // Show terms
+        function showTerms() {
+            alert('Termeni și Condiții: Prin finalizarea comenzii, ești de acord cu termenii și condițiile noastre. (Versiune demo)');
+        }
+        
+        // Funcția de căutare
+        function loadSearchFunction() {
+            window.cautaSimplu = function() {
+                let input = document.getElementById('cautaInput');
+                let rezultate = document.getElementById('rezultateCautare');
+                if (!input || !rezultate) return;
+                
+                let text = input.value.toLowerCase().trim();
+                
+                let produse = [
+                    { nume: "MacBook Neo", pret: "3.499,99 lei", link: "apple1.html", imagine: "apple1.webp" },
+                    { nume: "iPhone 17e", pret: "3.599,99 lei", link: "apple2.html", imagine: "apple2.webp" },
+                    { nume: "iPad Air 11 inch M4", pret: "3.399,99 lei", link: "apple3.html", imagine: "apple3.webp" },
+                    { nume: "MacBook Air 15 inch M5", pret: "7.799,99 lei", link: "apple4.html", imagine: "B1.webp" },
+                    { nume: "MacBook Air 13 inch M5", pret: "6.299,99 lei", link: "apple5.html", imagine: "S1.webp" },
+                    { nume: "AirPods 4", pret: "849,00 lei", link: "apple6.html", imagine: "AirPods1.webp" },
+                    { nume: "Laptop Gaming ASUS TUF A15", pret: "3.119,95 lei", link: "produs1.html", imagine: "tuf1.avif" },
+                    { nume: "Telefon Samsung Galaxy S25 Ultra", pret: "5.899,99 lei", link: "produs2.html", imagine: "S25U1.avif" },
+                    { nume: "Desktop PC APPLE Mac Mini M4", pret: "5.299,90 lei", link: "produs3.html", imagine: "MacMini1.avif" },
+                    { nume: "Smartwatch SAMSUNG Galaxy Watch7", pret: "799,00 lei", link: "produs4.html", imagine: "Watch71.avif" },
+                    { nume: "Casti SONY WH-1000XM5", pret: "1.049,99 lei", link: "produs5.html", imagine: "Sony1.avif" },
+                    { nume: "Consola NINTENDO Switch OLED White", pret: "1.399,99 lei", link: "produs6.html", imagine: "Nitendo1.jpg" },
+                    { nume: "Telefon SAMSUNG Galaxy S26", pret: "5.099,99 lei", link: "S26.html", imagine: "S261.avif" },
+                    { nume: "Telefon SAMSUNG Galaxy S26+", pret: "6.399,99 lei", link: "S26+.html", imagine: "S26+1.avif" },
+                    { nume: "Telefon SAMSUNG Galaxy S26 Ultra", pret: "7.399,99 lei", link: "S26U.html", imagine: "S26U1.avif" },
+                    { nume: "Televizor LED Smart SAMSUNG 65", pret: "2.049,99 lei", link: "TV1.html", imagine: "TV11.avif" },
+                    { nume: "Televizor Neo QLED MiniLED Smart", pret: "2.599,99 lei", link: "TV2.html", imagine: "TV21.jpg" },
+                    { nume: "Televizor LED Smart SAMSUNG 85", pret: "5.099,99 lei", link: "TV3.html", imagine: "TV31.avif" },
+                    { nume: "Laptop Gaming ASUS ROG Strix G16", pret: "7.399,99 lei", link: "ROG.html", imagine: "ROG1.jpg" },
+                    { nume: "Laptop ASUS Vivobook 16 LED", pret: "4.799,99 lei", link: "Vivobook16Led.html", imagine: "16Led1.jpg" },
+                    { nume: "Laptop ASUS Vivobook 16", pret: "2.799,99 lei", link: "Vivobook16.html", imagine: "Vbook1.avif" },
+                    { nume: "Laptop ASUS ExpertBook P1", pret: "2.099,99 lei", link: "ExpertBookP1.html", imagine: "Ebook1.avif" },
+                    { nume: "Laptop ASUS Zenbook S 14 OLED", pret: "7.699,99 lei", link: "Zenbooks14.html", imagine: "Zbook1.avif" },
+                    { nume: "Consola PlayStation 5 Slim", pret: "2.699,99 lei", link: "PS5.html", imagine: "PS1.avif" },
+                    { nume: "Consola Microsoft Xbox Series S", pret: "1.899,99 lei", link: "XboxS.html", imagine: "Xbox1.avif" }
+                ];
+                
+                let gasite = [];
+                for (let produs of produse) {
+                    if (produs.nume.toLowerCase().includes(text)) {
+                        gasite.push(produs);
+                    }
+                }
+                
+                if (gasite.length > 0 && text.length > 0) {
+                    let html = '';
+                    for (let produs of gasite) {
+                        html += '<div style="display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="window.location.href=\'' + produs.link + '\'">';
+                        html += '   <img src="' + produs.imagine + '" style="width: 45px; height: 45px; object-fit: contain; margin-right: 15px;" onerror="this.src=\'https://placehold.co/45x45/0066cc/white?text=??\'">';
+                        html += '   <div style="flex: 1;">';
+                        html += '       <div style="font-weight: 600; margin-bottom: 4px; color: #333;">' + produs.nume + '</div>';
+                        html += '       <div style="color: #0066cc; font-weight: 500; font-size: 14px;">' + produs.pret + '</div>';
+                        html += '   </div>';
+                        html += '</div>';
+                    }
+                    rezultate.innerHTML = html;
+                    rezultate.style.display = 'block';
+                } else {
+                    rezultate.innerHTML = '<div style="padding: 15px; text-align: center; color: #999;">Niciun produs găsit</div>';
+                    rezultate.style.display = 'block';
+                }
+            };
+
+            document.addEventListener('click', function(e) {
+                let searchBar = document.querySelector('.search-bar');
+                let rezultate = document.getElementById('rezultateCautare');
+                if (searchBar && !searchBar.contains(e.target)) {
+                    rezultate.style.display = 'none';
+                }
+            });
+
+            document.getElementById('cautaInput').addEventListener('keyup', function() {
+                cautaSimplu();
+            });
+
+            let searchButton = document.querySelector('.search-button');
+            if (searchButton) {
+                searchButton.addEventListener('click', function() {
+                    cautaSimplu();
+                });
+            }
+        }
+        
+        // Actualizare total la schimbarea metodei de livrare
+        document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+            radio.addEventListener('change', updateTotal);
+        });
+    </script>
+</body>
+</html>

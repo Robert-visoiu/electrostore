@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coșul meu - ElectroStore</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <style>
+        .cos-page {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .cos-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .cos-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #0066cc;
+        }
+        
+        .cos-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .cos-empty i {
+            font-size: 80px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .cos-empty h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .cos-empty p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .btn-continua {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .btn-continua:hover {
+            background: #0052a3;
+        }
+        
+        .cos-items {
+            margin-bottom: 30px;
+        }
+        
+        .cos-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto auto;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: white;
+        }
+        
+        .cos-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+        
+        .cos-item-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+        
+        .cos-item-pret {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        .cos-item-cantitate {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cos-item-cantitate button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .cos-item-cantitate button:hover {
+            background: #f0f0f0;
+        }
+        
+        .cos-item-cantitate span {
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .cos-item-subtotal {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .cos-item-sterge {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .cos-item-sterge:hover {
+            color: #ff4444;
+        }
+        
+        .cos-total-box {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+        
+        .cos-total-valoare {
+            font-weight: bold;
+            color: #0066cc;
+            font-size: 24px;
+        }
+        
+        .btn-finalizeaza {
+            width: 100%;
+            padding: 15px;
+            background: #00aa00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .btn-finalizeaza:hover {
+            background: #008800;
+        }
+        
+        @media (max-width: 768px) {
+            .cos-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .cos-item img {
+                margin: 0 auto;
+            }
+            
+            .cos-item-cantitate {
+                justify-content: center;
+            }
+        }
+        
+        .cos-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER COMPLET (același ca în toate paginile) -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="ElectroStore" class="logo-img">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Caută produse..." class="search-input">
+                <button class="search-button">Caută</button>
+            </div>
+            <div class="user-actions">
+                <a href="cont.html" class="icon-link"><i class="fa-regular fa-user"></i><span>Cont</span></a>
+                <a href="favorite.html" class="icon-link"><i class="fa-regular fa-heart"></i><span>Favorite</span></a>
+                <a href="cos.html" class="icon-link" id="cos-link">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Coș</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENIU (același ca în toate paginile) -->
+    <nav class="main-menu">
+        <div class="menu-container">
+            <ul class="menu-list">
+                <li class="menu-item"><a href="produse.html">Produse</a></li>
+                <li class="menu-item"><a href="precomanda.html">Precomanda Apple</a></li>
+                <li class="menu-item"><a href="index.html">Acasa</a></li>
+                <li class="menu-item dropdown">
+                    <a href="#">Finantare <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.brd.ro" target="_blank">Rate fără dobândă</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Credit online</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Leasing</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="contact.html">Suport clienti</a></li>
+                <li class="menu-item"><a href="despre.html">Despre noi</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PAGINA COȘ -->
+    <!-- PAGINA COȘ -->
+<div class="cos-page">
+    <h1 class="cos-title">
+        <i class="fa-solid fa-cart-shopping" style="margin-right: 10px; color: #0066cc;"></i>
+        Coșul meu
+    </h1>
+    
+    <!-- AICI SE VOR AFIȘA PRODUSELE DIN COȘ -->
+    <div id="cos-container">
+        <div class="cos-empty">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h3>Coșul tău este gol</h3>
+            <p>Adaugă produse pentru a continua</p>
+            <a href="index.html" class="btn-continua">Continuă cumpărăturile</a>
+        </div>
+    </div>
+    
+    <!-- AICI SE VAFIȘA TOTALUL -->
+    <div id="cos-total"></div>
+</div>
+
+    <!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Coloana 1 - Despre -->
+        <div class="footer-col">
+            <h4>ElectroStore</h4>
+            <p>Magazinul tău de încredere pentru produse electronice de calitate. Oferim laptopuri, telefoane, accesorii și multe altele.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+        
+        <!-- Coloana 2 - Link-uri utile -->
+        <div class="footer-col">
+            <h4>Link-uri utile</h4>
+            <ul class="footer-links">
+                <li><a href="despre.html">Despre noi</a></li>
+                <li><a href="despre.html">Contact</a></li>
+               <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd" target="_blank">Finanțare BRD</a></li>
+                <li><a href="retur.html">Retur și garanție</a></li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 3 - Contact -->
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-contact">
+                <li><i class="fa-solid fa-location-dot"></i>  Bulevardul Gării 25, 627350 Focșani</li>
+                <li><i class="fa-solid fa-phone"></i> 0767 676 767</li>
+                <li><i class="fa-solid fa-envelope"></i> contact@electrostore.ro</li>
+                <li><i class="fa-solid fa-clock"></i> Luni - Vineri: 09:00 - 18:00</li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 4 - Newsletter -->
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>Abonează-te pentru oferte exclusive!</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Adresa ta de email" class="newsletter-input">
+                <button type="submit" class="newsletter-btn">Abonare</button>
+            </form>
+            <p class="copyright">© 2026 ElectroStore. Toate drepturile rezervate.</p>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- Include codul pentru coș -->
+    <script src="cos.js"></script>
+    
+
+
+
+
+<script src="cos.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            afiseazaCos();
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

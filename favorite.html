@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritele mele - ElectroStore</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="style.css">
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="style.css">
+    <!-- CSS suplimentar pentru favorite -->
+    <style>
+        /* Stiluri pentru pagina de favorite */
+        .favorite-page {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #0066cc;
+        }
+        
+        /* Grid pentru produsele favorite */
+        .favorite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        /* Card produs favorite */
+        .favorite-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+            background: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .favorite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .favorite-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .favorite-card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+            min-height: 40px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .favorite-card .pret {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0066cc;
+            margin: 10px 0;
+        }
+        
+        .favorite-card .vezi-produs {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+        
+        .favorite-card .vezi-produs:hover {
+            background: #0052a3;
+        }
+        
+        /* Buton ștergere */
+        .sterge-favorite {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #999;
+            font-size: 16px;
+        }
+        
+        .sterge-favorite:hover {
+            background: #ff4444;
+            border-color: #ff4444;
+            color: white;
+        }
+        
+        /* Mesaj când nu sunt favorite */
+        .no-favorites {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 18px;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        
+        .no-favorites i {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .no-favorites a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .no-favorites a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Badge favorite (același ca în restul site-ului) */
+        .favorite-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .favorite-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 15px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER COMPLET -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="ElectroStore" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Bara de căutare -->
+            <div class="search-bar" style="position: relative;">
+                <input type="text" id="cautaInput" placeholder="Caută produse..." class="search-input">
+                <button class="search-button" onclick="cautaSimplu()">Caută</button>
+                <div id="rezultateCautare" class="rezultate-cautare" style="display: none;"></div>
+            </div>
+
+            <!-- Iconițe user -->
+            <div class="user-actions">
+                <a href="cont.html" class="icon-link">
+                    <i class="fa-regular fa-user"></i> 
+                    <span>Cont</span>
+                </a>
+                <a href="favorite.html" class="icon-link" id="favorite-link">
+                    <i class="fa-regular fa-heart"></i> 
+                    <span>Favorite</span>
+                </a>
+               <a href="cos.html" class="icon-link" id="cos-link">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Coș</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENIU CATEGORII -->
+    <nav class="main-menu">
+        <div class="menu-container">
+            <ul class="menu-list">
+                <li class="menu-item"><a href="produse.html">Produse</a></li>
+                <li class="menu-item"><a href="precomanda.html">Precomanda Apple</a></li>
+                <li class="menu-item"><a href="index.html">Acasa</a></li>
+                <li class="menu-item dropdown">
+                    <a href="#">Finantare <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.brd.ro" target="_blank">Rate fără dobândă</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Credit online</a></li>
+                        <li><a href="https://www.brd.ro" target="_blank">Leasing</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="contact.html">Suport clienti</a></li>
+                <li class="menu-item"><a href="despre.html">Despre noi</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PAGINA FAVORITE -->
+    <div class="favorite-page">
+        <h1 class="page-title">
+            <i class="fa-regular fa-heart" style="margin-right: 10px; color: #ff4444;"></i>
+            Favoritele mele
+        </h1>
+        
+        <!-- Container pentru lista de favorite -->
+        <div id="lista-favorite">
+            <div class="no-favorites">
+                <i class="fa-regular fa-heart"></i>
+                <p>Nu ai niciun produs salvat la favorite.</p>
+                <p>Mergi la <a href="index.html">pagina principală</a> pentru a adăuga produse.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Coloana 1 - Despre -->
+        <div class="footer-col">
+            <h4>ElectroStore</h4>
+            <p>Magazinul tău de încredere pentru produse electronice de calitate. Oferim laptopuri, telefoane, accesorii și multe altele.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+        
+        <!-- Coloana 2 - Link-uri utile -->
+        <div class="footer-col">
+            <h4>Link-uri utile</h4>
+            <ul class="footer-links">
+                <li><a href="despre.html">Despre noi</a></li>
+                <li><a href="despre.html">Contact</a></li>
+               <li><a href="https://www.brd.ro/persoane-fizice/carduri-si-conturi/carduri/card-de-credit-brd" target="_blank">Finanțare BRD</a></li>
+                <li><a href="retur.html">Retur și garanție</a></li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 3 - Contact -->
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-contact">
+                <li><i class="fa-solid fa-location-dot"></i>  Bulevardul Gării 25, 627350 Focșani</li>
+                <li><i class="fa-solid fa-phone"></i> 0767 676 767</li>
+                <li><i class="fa-solid fa-envelope"></i> contact@electrostore.ro</li>
+                <li><i class="fa-solid fa-clock"></i> Luni - Vineri: 09:00 - 18:00</li>
+            </ul>
+        </div>
+        
+        <!-- Coloana 4 - Newsletter -->
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>Abonează-te pentru oferte exclusive!</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Adresa ta de email" class="newsletter-input">
+                <button type="submit" class="newsletter-btn">Abonare</button>
+            </form>
+            <p class="copyright">© 2026 ElectroStore. Toate drepturile rezervate.</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <!-- JAVASCRIPT PENTRU FAVORITE -->
+    <script>
+        // ========== SISTEM FAVORITE GLOBAL ==========
+        let favorite = JSON.parse(localStorage.getItem('favorite')) || [];
+        
+        // Actualizare badge
+        function actualizeazaBadgeFavorite() {
+            let iconInima = document.querySelector('.fa-heart');
+            if (iconInima) {
+                let parent = iconInima.closest('.icon-link');
+                if (!parent) return;
+                
+                let badgeVechi = document.querySelector('.favorite-badge');
+                if (badgeVechi) badgeVechi.remove();
+                
+                if (favorite.length > 0) {
+                    let badge = document.createElement('span');
+                    badge.className = 'favorite-badge';
+                    badge.textContent = favorite.length;
+                    parent.style.position = 'relative';
+                    parent.appendChild(badge);
+                }
+            }
+        }
+        
+        // Afișare favorite în pagină
+        function afiseazaFavorite() {
+            let container = document.getElementById('lista-favorite');
+            if (!container) return;
+            
+            if (favorite.length === 0) {
+                container.innerHTML = `
+                    <div class="no-favorites">
+                        <i class="fa-regular fa-heart"></i>
+                        <p>Nu ai niciun produs salvat la favorite.</p>
+                        <p>Mergi la <a href="index.html">pagina principală</a> pentru a adăuga produse.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="favorite-grid">';
+            for (let produs of favorite) {
+                html += `
+                    <div class="favorite-card">
+                        <img src="${produs.imagine}" alt="${produs.nume}">
+                        <h3>${produs.nume}</h3>
+                        <div class="pret">${produs.pret}</div>
+                        <a href="${produs.pagina}" class="vezi-produs">Vezi produsul</a>
+                        <button class="sterge-favorite" onclick="stergeDinFavorite('${produs.nume.replace(/'/g, "\\'")}')">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        
+        // Ștergere din favorite
+        function stergeDinFavorite(numeProdus) {
+            favorite = favorite.filter(p => p.nume !== numeProdus);
+            localStorage.setItem('favorite', JSON.stringify(favorite));
+            actualizeazaBadgeFavorite();
+            afiseazaFavorite();
+            
+            // Notificare
+            let notificare = document.createElement('div');
+            notificare.textContent = '❌ Produs șters din favorite';
+            notificare.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #333;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 5px;
+                z-index: 9999;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            `;
+            document.body.appendChild(notificare);
+            setTimeout(() => notificare.remove(), 2000);
+        }
+        
+        // Inițializare la încărcare
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizeazaBadgeFavorite();
+            afiseazaFavorite();
+        });
+    </script>
+
+    <!-- Script pentru căutare (dacă există) -->
+    <script>
+        function cautaSimplu() {
+            // Funcția ta de căutare existentă
+        }
+    </script>
+
+
+<script>
+    function cautaSimplu() {
+        let input = document.getElementById('cautaInput');
+        let rezultate = document.getElementById('rezultateCautare');
+        let text = input.value.toLowerCase().trim();
+        
+        // Lista produselor - CU CĂI SIMPLE (doar numele fișierului)
+        let produse = [
+            { nume: "MacBook Neo", pret: "3.499,99 lei", link: "apple1.html", imagine: "apple1.webp" },
+            { nume: "iPhone 17e", pret: "3.599,99 lei", link: "apple2.html", imagine: "apple2.webp" },
+            { nume: "iPad Air 11 inch M4", pret: "3.399,99 lei", link: "apple3.html", imagine: "apple3.webp" },
+            { nume: "MacBook Air 15 inch M5", pret: "7.799,99 lei", link: "apple4.html", imagine: "apple4.webp" },
+            { nume: "MacBook Air 13 inch M5", pret: "6.299,99 lei", link: "apple5.html", imagine: "apple5.webp" },
+            { nume: "AirPods 4", pret: "849,00 lei", link: "apple6.html", imagine: "apple6.webp" },
+            
+            { nume: "Laptop Gaming ASUS TUF A15", pret: "3.119,95 lei", link: "produs1.html", imagine: "produs1.avif" },
+            { nume: "Telefon SAMSUNG Galaxy S25 Ultra", pret: "5.899,99 lei", link: "produs2.html", imagine: "produs2.avif" },
+            { nume: "Desktop PC APPLE Mac Mini M4", pret: "5.299,99 lei", link: "produs3.html", imagine: "produs3.avif" },
+            { nume: "Smartwatch SAMSUNG Galaxy Watch7", pret: "799,00 lei", link: "produs4.html", imagine: "produs4.avif" },
+            { nume: "Casti SONY WH-1000XM5", pret: "1.049,99 lei", link: "produs5.html", imagine: "produs5.avif" },
+            { nume: "Consola NINTENDO Switch OLED White", pret: "1.399,99 lei", link: "produs6.html", imagine: "produs6.jpg" },
+            
+            { nume: "Telefon SAMSUNG Galaxy S26", pret: "5.099,99 lei", link: "S26.html", imagine: "S261.avif" },
+            { nume: "Telefon SAMSUNG Galaxy S26+", pret: "6.399,99 lei", link: "S26+.html", imagine: "S26+1.avif" },
+            { nume: "Telefon SAMSUNG Galaxy S26 Ultra", pret: "7.399,99 lei", link: "S26U.html", imagine: "S26U1.avif" },
+            
+            { nume: "Televizor LED Smart SAMSUNG 65", pret: "2.049,99 lei", link: "TV1.html", imagine: "TV11.avif" },
+            { nume: "Televizor Neo QLED MiniLED Smart", pret: "2.599,99 lei", link: "TV2.html", imagine: "TV21.jpg" },
+            { nume: "Televizor LED Smart SAMSUNG 85", pret: "5.099,99 lei", link: "TV3.html", imagine: "TV31.avif" },
+            
+            { nume: "Laptop Gaming ASUS ROG Strix G16", pret: "7.399,99 lei", link: "ROG.html", imagine: "ROG1.jpg" },
+            { nume: "Laptop ASUS Vivobook 16 LED", pret: "4.799,99 lei", link: "Vivobook16Led.html", imagine: "16Led1.jpg" },
+            { nume: "Laptop ASUS Vivobook 16", pret: "2.799,99 lei", link: "Vivobook16.html", imagine: "Vbook1.avif" },
+            { nume: "Laptop ASUS ExpertBook P1", pret: "2.099,99 lei", link: "ExpertBookP1.html", imagine: "Ebook1.avif" },
+            { nume: "Laptop ASUS Zenbook S 14 OLED", pret: "7.699,99 lei", link: "Zenbooks14.html", imagine: "Zbook1.avif" },
+            
+            { nume: "Consola PlayStation 5 Slim", pret: "2.699,99 lei", link: "PS5.html", imagine: "PS1.avif" },
+            { nume: "Consola Microsoft Xbox Series S", pret: "1.899,99 lei", link: "XboxS.html", imagine: "Xbox1.avif" }
+        ]; 
+
+        // Caută produse
+        let gasite = [];
+        for (let produs of produse) {
+            if (produs.nume.toLowerCase().includes(text)) {
+                gasite.push(produs);
+            }
+        }
+        
+        // Afișează rezultate
+        if (gasite.length > 0 && text.length > 0) {
+            let html = '';
+            for (let produs of gasite) {
+                html += '<div style="display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="window.location.href=\'' + produs.link + '\'">';
+                html += '   <img src="' + produs.imagine + '" style="width: 45px; height: 45px; object-fit: contain; margin-right: 15px;" onerror="this.src=\'https://placehold.co/45x45/0066cc/white?text=??\'">';
+                html += '   <div style="flex: 1;">';
+                html += '       <div style="font-weight: 600; margin-bottom: 4px; color: #333;">' + produs.nume + '</div>';
+                html += '       <div style="color: #0066cc; font-weight: 500; font-size: 14px;">' + produs.pret + '</div>';
+                html += '   </div>';
+                html += '</div>';
+            }
+            rezultate.innerHTML = html;
+            rezultate.style.display = 'block';
+        } else {
+            rezultate.innerHTML = '<div style="padding: 15px; text-align: center; color: #999;">Niciun produs găsit</div>';
+            rezultate.style.display = 'block';
+        }
+    }
+
+    // Ascunde la click în afară
+    document.addEventListener('click', function(e) {
+        let searchBar = document.querySelector('.search-bar');
+        let rezultate = document.getElementById('rezultateCautare');
+        if (searchBar && !searchBar.contains(e.target)) {
+            rezultate.style.display = 'none';
+        }
+    });
+
+    // Caută în timp real
+    document.getElementById('cautaInput').addEventListener('keyup', function() {
+        cautaSimplu();
+    });
+
+    // Caută la click pe buton
+    let searchButton = document.querySelector('.search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
+            cautaSimplu();
+        });
+    }
+    </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1913 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #111;
+    color: white;
+    padding: 10px 20px;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 10px ;
+}
+
+
+/* Stilizare header ca în exemplu */
+body{
+    background-color: rgb(255, 255, 255);
+}
+.header {
+    background-color: rgb(255, 255, 255);        /* Fundal alb */
+    padding: 10px 20px;             /* Spațiu în interior */
+    border-bottom: 1px solid #eee;  /* Linie subțire dedesubt (ca în site) */
+}
+
+.logo-container {
+    display: flex;           /* Pune logo și textul pe aceeași linie */
+    align-items: center;      
+    gap: 25px;               /* Distanța dintre logo și text */
+}
+
+.logo-img {
+    height: 200px;            /* **ASTA REPARĂ DIMENSIUNEA** - logo-ul nu va mai fi uriaș */
+    width: auto;             /* Păstrează proporțiile */
+}
+
+.site-title {
+    font-size: 40px;         /* Dimensiunea textului */
+    font-weight: bold;       /* Text îngroșat */
+    color: #333;             /* Culoarea textului */
+    margin: 0;               /* Elimină spațiul default din jurul lui h1 */
+}
+
+
+
+
+
+/* Reset simplu */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header-ul principal */
+.header {
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0; /* Linie gri subtire jos */
+    padding: 15px 0;
+}
+
+/* Container care ține toate elementele */
+.header-container {
+    max-width: 1400px;    /* Lățime maximă ca pe site-uri mari */
+    margin: 0 auto;       /* Centrat */
+    padding: 0 20px;      /* Spațiu pe laterale */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Logo stânga, search mijloc, acțiuni dreapta */
+    gap: 30px;
+}
+
+/* Logo */
+.logo-img {
+    height: 50px;         /* Ajustează după logo-ul tău */
+    width: auto;
+}
+
+/* Bara de căutare */
+.search-bar {
+    flex: 1;              /* Ocupă spațiul disponibil */
+    display: flex;
+    max-width: 600px;     /* Lățime maximă pentru search */
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-right: none;   /* Se îmbină cu butonul */
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #007bff; /* Culoare când dai click */
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: white;
+    border: 1px solid #007bff;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Mai închis la hover */
+}
+
+/* Acțiuni utilizator (Cont și Coș) */
+.user-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.user-actions a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.user-actions a:hover {
+    color: #007bff;
+}
+
+
+
+
+
+
+
+
+
+.user-actions {
+    display: flex;
+    gap: 25px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;     /* Iconiță deasupra, text dedesubt */
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;            /* Text mic sub iconiță */
+    transition: color 0.3s;
+    gap: 4px;
+}
+
+.icon-link i {
+    font-size: 22px;            /* Dimensiunea iconiței */
+    color: #555;
+}
+
+.icon-link:hover {
+    color: #007bff;              /* Culoare la hover */
+}
+
+.icon-link:hover i {
+    color: #007bff;              /* Și iconița se colorează */
+}
+
+/* Varianta cu iconiță și text pe aceeași linie (dacă preferi) */
+.icon-link-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #333;
+}
+
+.icon-link-inline i {
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Meniul principal - VARIANTĂ CENTRATĂ */
+.main-menu {
+    background-color: #ffffff;  /* Alb curat */
+    border-bottom: 2px solid #f0f0f0;  /* Linie subtire gri */
+    padding: 0;
+}
+
+.menu-container {
+    max-width: 1200px;  /* Lățime mai mică pentru centrare optimă */
+    margin: 0 auto;     /* CENTREAZĂ ÎN PAGINĂ */
+    padding: 0 20px;
+}
+
+.menu-list {
+    display: flex;
+    justify-content: center;  /* CENTREAZĂ ITEMELE ORIZONTAL */
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 35px;  /* Spațiu între itemi (mai mare ca să respire) */
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-item a {
+    display: block;
+    padding: 18px 0;  /* Puțin mai înalt */
+    color: #1a1a1a;    /* Negru mai moale */
+    text-decoration: none;
+    font-weight: 500;  /* Mediu, nu prea gros */
+    font-size: 15px;
+    letter-spacing: 0.3px;  /* Un pic de spațiere pentru eleganță */
+    transition: color 0.2s ease;
+    border-bottom: 2px solid transparent;  /* Pregătit pentru efect de hover */
+}
+
+
+
+
+.menu-item a {
+    font-weight: bold;
+}
+
+
+
+
+.menu-item a:hover {
+    color: #0066cc;  /* Albastru Altex */
+    border-bottom-color: #0066cc;  /* Linie albastră sub text la hover */
+}
+
+/* Stil pentru itemul cu dropdown */
+.dropdown > a i {
+    font-size: 12px;
+    margin-left: 6px;
+    color: #888;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;  /* Centrare dropdown */
+    transform: translateX(-50%);  /* Ajustare centrare */
+    background-color: white;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;  /* Colțuri rotunjite */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    list-style: none;
+    padding: 12px 0;
+    margin: 0;
+    min-width: 220px;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-menu li a {
+    padding: 10px 24px;
+    font-weight: 400;
+    border-bottom: none;
+    font-size: 14px;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f5f8ff;  /* Albastru foarte deschis */
+    color: #0066cc;
+    border-bottom: none;
+}
+
+/* Afișează dropdown la hover cu efect smooth */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Link-ul activ (pagina curentă) */
+.menu-item.active a {
+    color: #0066cc;
+    border-bottom-color: #0066cc;
+    font-weight: 600;
+}
+
+/* Pentru mobile */
+@media (max-width: 768px) {
+    .menu-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px 25px;
+        padding: 12px 0;
+    }
+    
+    .menu-item a {
+        padding: 5px 0;
+        font-size: 14px;
+        border-bottom: none;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background-color: #f9f9f9;
+        padding: 5px 0 5px 20px;
+        min-width: 100%;
+        border-radius: 4px;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+.main-menu {
+    background-color: #007bff;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+
+
+
+
+
+
+
+
+.carousel-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+}
+
+.carousel-track {
+    display: flex;
+    width: 300%; /* 100% x numărul de slide-uri */
+    animation: slide 12s infinite; /* Schimbă viteza aici */
+}
+
+.carousel-slide {
+    width: 33.333%; /* 100% / numărul de slide-uri */
+    flex-shrink: 0;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Animația care face caruselul */
+@keyframes slide {
+    0% { transform: translateX(0); }        /* Prima imagine */
+    25% { transform: translateX(0); }        /* Pauză pe prima */
+    33% { transform: translateX(-33.333%); } /* A doua imagine */
+    58% { transform: translateX(-33.333%); } /* Pauză pe a doua */
+    66% { transform: translateX(-66.666%); } /* A treia imagine */
+    92% { transform: translateX(-66.666%); } /* Pauză pe a treia */
+    100% { transform: translateX(0); }       /* Înapoi la prima */
+}
+
+/* Buline (doar decor, nu funcționale) */
+.carousel-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carousel-slide img {
+        height: 200px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SECȚIUNE TOP OFERTE */
+.top-oferte {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: #0066cc;
+    margin: 10px auto 0;
+}
+
+/* GRILA PRODUSE */
+.produse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* LINK PRODUS (învelește tot cardul) */
+.produs-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.produs-link:hover {
+    transform: translateY(-5px);
+}
+
+/* CARD PRODUS */
+.produs-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    background: white;
+    transition: box-shadow 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.produs-link:hover .produs-card {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* BADGE REDUCERE */
+.produs-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff4444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 1;
+}
+
+/* IMAGINE PRODUS */
+.produs-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* TITLU PRODUS */
+.produs-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+    min-height: 40px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* DESCRIERE */
+.descriere {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+    min-height: 40px;
+    line-height: 1.4;
+}
+
+/* STOC */
+.stoc {
+    color: #00aa00;
+    font-size: 14px;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+/* RATĂ LUNARĂ */
+.rate {
+    color: #0066cc;
+    font-size: 14px;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+/* PREȚURI */
+.pret-container {
+    margin: 12px 0;
+}
+
+.pret-vechi {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+    display: block;
+}
+
+.pret-nou {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .produse-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 15px;
+    }
+    
+    .produs-card img {
+        height: 150px;
+    }
+    
+    .pret-nou {
+        font-size: 18px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* Asigură-te că link-ul acoperă toată imaginea */
+.carousel-slide a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide a img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s; /* Efect opțional */
+}
+
+/* Efect la hover (opțional) */
+.carousel-slide a:hover img {
+    transform: scale(1.02);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FOOTER */
+.footer {
+    background-color: #1a1a1a;  /* Fundal închis */
+    color: #fff;
+    padding: 50px 0 20px;
+    margin-top: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* Titluri coloane */
+.footer-col h4 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: #0066cc;
+}
+
+/* Text coloane */
+.footer-col p {
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Social links */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #333;
+    color: #fff;
+    border-radius: 50%;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background: #0066cc;
+    transform: translateY(-3px);
+}
+
+/* Listă link-uri */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #0066cc;
+    padding-left: 5px;
+}
+
+/* Listă contact */
+.footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact li {
+    color: #999;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.footer-contact i {
+    color: #0066cc;
+    width: 20px;
+    margin-top: 3px;
+}
+
+/* Newsletter */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.newsletter-input {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+}
+
+.newsletter-input::placeholder {
+    color: #999;
+}
+
+.newsletter-btn {
+    padding: 12px;
+    background: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: 500;
+}
+
+.newsletter-btn:hover {
+    background: #0052a3;
+}
+
+/* Copyright */
+.copyright {
+    color: #666;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer {
+        padding: 30px 0 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container rezultate căutare */
+.rezultate-cautare {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Element individual rezultat */
+.rezultat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.rezultat-item:hover {
+    background: #ffffff;
+}
+
+.rezultat-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.rezultat-info {
+    flex: 1;
+}
+
+.rezultat-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.rezultat-info .pret {
+    color: #0066cc;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Când nu sunt rezultate */
+.niciun-rezultat {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+}
+
+/* Poziționarea corectă pentru search-bar */
+.search-bar {
+    position: relative;
+    flex: 1;
+    max-width: 600px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Stiluri pentru rezultatele căutării */
+.rezultat-cautare-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.rezultat-cautare-item:hover {
+    background: #f5f5f5;
+}
+
+.rezultat-cautare-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 12px;
+    border-radius: 4px;
+}
+
+.rezultat-cautare-info {
+    flex: 1;
+}
+
+.rezultat-cautare-info strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #333;
+    font-size: 14px;
+}
+
+.rezultat-cautare-pret {
+    color: #0066cc;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.produse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+
+
+
+
+
+
+
+.stoc.epuizat {
+    color: #ff0000 !important;  /* Roșu aprins - va fi doar pentru "Stoc Epuizat" */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========== PAGINA PRODUS ========== */
+
+/* Breadcrumb (Navigare) */
+.breadcrumb {
+    padding: 15px 0;
+    color: #666;
+    font-size: 14px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.breadcrumb a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    color: #999;
+}
+
+/* Container principal produs */
+.produs-page {
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+}
+
+.produs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: white;
+    border-radius: 10px;
+}
+
+/* ========== GALERIE IMAGINI ========== */
+.produs-galerie {
+    position: relative;
+}
+
+.imagine-principala {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+}
+
+.galerie-miniaturi {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.miniatura {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #f9f9f9;
+}
+
+.miniatura:hover {
+    border: 2px solid #0066cc;
+    transform: scale(1.05);
+}
+
+.miniatura.active {
+    border: 2px solid #0066cc;
+}
+
+/* ========== DETALII PRODUS ========== */
+.produs-info {
+    padding: 20px 0;
+}
+
+.produs-sku {
+    color: #999;
+    font-size: 14px;
+    margin: 0 0 10px;
+}
+
+.produs-titlu {
+    font-size: 28px;
+    margin: 0 0 15px;
+    color: #333;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.produs-pret {
+    font-size: 36px;
+    font-weight: bold;
+    color: #0066cc;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pret-vechi {
+    font-size: 18px;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
+/* Secțiune culoare */
+.produs-culoare {
+    margin: 25px 0;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.culoare-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.culoare-valoare {
+    color: #666;
+}
+
+.culoare-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: #f0f0f0;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* ========== ACȚIUNI PRODUS ========== */
+.produs-actiuni {
+    margin: 30px 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-cos {
+    flex: 2;
+    min-width: 200px;
+    padding: 15px 30px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+.btn-cos:hover {
+    background: #0052a3;
+}
+
+.btn-cos i {
+    font-size: 18px;
+}
+
+.btn-favorite {
+    flex: 1;
+    min-width: 50px;
+    padding: 15px;
+    background: white;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-favorite:hover {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+/* ========== OPȚIUNI PLATĂ ========== */
+.plata-optiuni {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.plata-optiuni h3 {
+    font-size: 16px;
+    margin: 0 0 15px;
+    color: #333;
+}
+
+.optiuni-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.optiune {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.optiune i {
+    color: #0066cc;
+    font-size: 16px;
+}
+
+/* ========== PAGINAȚIE POZE ========== */
+.poza-numar {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* ========== SECȚIUNE REVIEW ========== */
+.produs-review {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stelute {
+    color: #ffc107;
+    font-size: 14px;
+}
+
+.nr-review-uri {
+    color: #999;
+    font-size: 14px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .produs-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .imagine-principala {
+        height: 300px;
+    }
+    
+    .produs-titlu {
+        font-size: 24px;
+    }
+    
+    .produs-pret {
+        font-size: 28px;
+    }
+    
+    .btn-cos {
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .produs-actiuni {
+        flex-direction: column;
+    }
+    
+    .miniatura {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .optiuni-grid {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Badge pentru favorite */
+.favorite-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+/* Animație pentru inimă */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Buton favorite activ */
+.btn-favorite.activ {
+    color: #ff4444;
+    border-color: #ff4444;
+}
+
+.btn-favorite.activ i {
+    color: #ff4444;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Badge pentru favorite și coș - ACELEȘI PROPRIETĂȚI */
+.favorite-badge, 
+.cos-badge {
+    position: absolute;
+    top: -8px;           /* Sus, deasupra iconiței */
+    right: -8px;         /* Dreapta */
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Asigură-te că iconițele au position: relative */
+.icon-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========== STILURI PENTRU MOBIL ========== */
+@media (max-width: 768px) {
+    
+    /* HEADER */
+    .header-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+    }
+    
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .logo-img {
+        height: 40px;
+    }
+    
+    .search-bar {
+        margin: 10px 0;
+        max-width: 100%;
+    }
+    
+    .user-actions {
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+    
+    .icon-link span {
+        font-size: 11px;
+    }
+    
+    /* MENIU */
+    .menu-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 15px;
+    }
+    
+    .menu-item a {
+        padding: 8px 0;
+        font-size: 13px;
+    }
+    
+    /* PRODUSE */
+    .produse-grid {
+        grid-template-columns: 1fr; /* O coloană pe mobil */
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    .produs-card {
+        min-height: auto;
+        padding: 12px;
+    }
+    
+    .produs-card img {
+        height: 180px;
+    }
+    
+    .produs-card h3 {
+        font-size: 15px;
+        min-height: auto;
+    }
+    
+    .descriere {
+        font-size: 13px;
+        min-height: auto;
+    }
+    
+    .pret-nou {
+        font-size: 18px;
+    }
+    
+    /* SECȚIUNI */
+    .section-title {
+        font-size: 24px;
+        margin: 20px 0 15px;
+    }
+    
+    /* FOOTER */
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer-col {
+        text-align: center;
+    }
+    
+    .footer-links {
+        padding: 0;
+    }
+    
+    /* CARUSEL (dacă ai) */
+    .carousel-slide img {
+        height: 180px;
+    }
+    
+    .slide-content {
+        padding: 10px;
+        left: 5%;
+        max-width: 80%;
+    }
+    
+    .slide-content h2 {
+        font-size: 20px;
+    }
+    
+    .slide-content p {
+        font-size: 14px;
+    }
+    
+    .slide-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.menu-toggle {
+    display: none;
+    width: 100%;
+    padding: 12px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .main-menu {
+        display: none;
+    }
+    
+    .main-menu.show {
+        display: block;
+    }
+    
+    .menu-list {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .menu-item {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .menu-item a {
+        background: none !important;
+        border-radius: 0 !important;
+        padding: 12px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== MOBILE FIRST ===== */
+
+/* Ascunde meniul pe mobile, arată hamburger */
+@media (max-width: 768px) {
+  
+  /* Header principal */
+  header, .navbar {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    gap: 10px;
+  }
+
+  /* Logo + hamburger pe același rând */
+  .nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Bara de căutare — lățime completă, pe rândul 2 */
+  .search-bar, .search-container {
+    width: 100% !important;
+    order: 3;           /* Apare după logo și hamburger */
+    flex: 1 1 100%;
+  }
+
+  .search-bar input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Meniul de navigație — ascuns implicit pe mobile */
+  .nav-links, nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    order: 4;
+  }
+
+  /* Când meniul e deschis */
+  .nav-links.open, nav ul.open {
+    display: flex;
+  }
+
+  /* Buton hamburger — vizibil doar pe mobile */
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+
+/* Ascunde hamburgerul pe desktop */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+
+
+
+
+
+/* ===== FIX MOBIL COMPLET ===== */
+@media (max-width: 768px) {
+
+    /* Header — logo sus centrat, search jos */
+    .header-container {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    /* Iconițele Cont/Favorite/Coș — pe același rând cu logo-ul */
+    .user-actions {
+        flex: 0;
+        gap: 15px;
+        margin-top: 0;
+    }
+
+    /* Bara de căutare — linie separată, lățime 100% */
+    .search-bar {
+        order: 3;
+        flex: 1 1 100%;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .search-input {
+        font-size: 14px;
+    }
+
+    /* Meniu — ascuns, se deschide cu butonul */
+    .main-menu {
+        display: none !important;
+        position: static;
+    }
+
+    .main-menu.show {
+        display: block !important;
+    }
+
+    .menu-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 5px 0;
+    }
+
+    .menu-item {
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .menu-item a {
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        color: white !important;
+    }
+
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        background: rgba(0,0,0,0.15);
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        display: none;
+        padding: 0;
+    }
+
+    .dropdown.open .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu li a {
+        padding: 10px 20px 10px 35px !important;
+        font-size: 13px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* Logo și iconițe pe același rând */
+    .header-container {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    /* Iconițele — pe același rând, orizontal */
+    .user-actions {
+        flex-direction: row !important;
+        gap: 15px;
+        margin-top: 0 !important;
+        justify-content: flex-end;
+    }
+
+    /* Ascunde textul (Cont, Favorite, Coș) pe mobil */
+    .icon-link span {
+        display: none;
+    }
+
+    .icon-link i {
+        font-size: 24px;
+    }
+
+    /* Bara de căutare — linie separată */
+    .search-bar {
+        order: 3;
+        flex: 1 1 100%;
+        max-width: 100% !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .carousel-slide img,
+    .carousel-slide a img {
+        height: auto !important;
+        max-height: 220px;
+        object-fit: contain !important;
+        background: #f5f5f5;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    .header-container {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between !important;
+        padding: 10px 15px;
+    }
+
+    .logo {
+        flex: 0 0 auto;
+    }
+
+    /* Iconițele — grupate în dreapta, lângă logo */
+    .user-actions {
+        flex: 0 0 auto !important;
+        flex-direction: row !important;
+        gap: 18px !important;
+        margin-top: 0 !important;
+        justify-content: flex-end !important;
+    }
+
+    .icon-link span {
+        display: none !important;
+    }
+
+    .icon-link i {
+        font-size: 22px;
+    }
+
+    /* Search — rând separat dedesubt */
+    .search-bar {
+        flex: 1 1 100% !important;
+        order: 3;
+        max-width: 100% !important;
+        margin-top: 8px;
+    }
+}
